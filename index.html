@@ -14,7 +14,7 @@ body{
  overflow-x:hidden;
 }
 
-/※ 背景アニメーション ※/
+/＊ 背景アニメーション ＊/
 body::before{
  content:"";
  position:fixed;
@@ -30,7 +30,7 @@ body::before{
  100%{transform:translate(-20%,-20%)}
 }
 
-/ ※ 最初画面 ※/
+/ ＊ 最初画面 ＊ /
 #intro{
  position:fixed;
  width:100%;
@@ -46,10 +46,12 @@ body::before{
  opacity:0;
  display:inline-block;
  transform:translateY(20px);
- transition:0.3s;
+ transition:
+  
+/ 0.3s;
 }
-
-/ ※ メイン ※/
+ 
+ / ＊ メイン ＊ /
 #main{
  opacity:0;
  transition:1s;
@@ -60,7 +62,7 @@ body::before{
  opacity:1;
 }
 
-/ ※ ボタン ※/
+/ ＊ ボタン ＊ /
 .button{
  background:gold;
  color:black;
@@ -71,7 +73,7 @@ body::before{
  text-decoration:none;
 }
 
-/ ※ キャスト ※/
+/ ＊ キャスト ＊/
 .cast-wrap{
  display:flex;
  overflow-x:auto;
@@ -88,7 +90,7 @@ body::before{
  width:100%;
 }
 
-/ ※ LINEボタン ※/
+/ ＊ LINEボタン ＊ /
 .line-btn{
  position:fixed;
  bottom:20px;
