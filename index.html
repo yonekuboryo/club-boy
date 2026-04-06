@@ -11,22 +11,50 @@ body {
   font-family: sans-serif;
   background: black;
   color: white;
+  overflow-x: hidden;
 }
 
+/* 最初のコンセプト画面 /
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: black;
+}
+
+.hero h1 {
+  font-size: 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1.5s forwards;
+}
+
+.hero p {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1.5s 0.5s forwards;
+}
+
+/ アニメーション /
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/ メイン /
 header {
-  background: linear-gradient(to right, black, gold);
   text-align: center;
-  padding: 60px 20px;
+  padding: 40px 20px;
+  background: linear-gradient(to right, black, gold);
 }
 
 h1 {
   font-size: 50px;
   margin: 0;
-}
-
-.catch {
-  font-size: 18px;
-  margin-top: 10px;
 }
 
 .button {
@@ -40,11 +68,25 @@ h1 {
   font-weight: bold;
 }
 
+/ 固定LINEボタン /
+.fixed-line {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #06C755;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 20px;
+  color: white;
+}
+
+/ セクション /
 .section {
   padding: 40px 20px;
   text-align: center;
 }
 
+/ キャスト */
 .cast-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -55,27 +97,32 @@ h1 {
   background: #111;
   padding: 10px;
   border-radius: 10px;
+  transition: 0.3s;
+}
+
+.cast:hover {
+  transform: scale(1.05);
 }
 
 .cast img {
   width: 100%;
   border-radius: 10px;
 }
-
-.price {
-  font-size: 20px;
-  margin: 10px 0;
-}
 </style>
 </head>
 
 <body>
 
+<!-- 最初のコンセプト -->
+<div class="hero">
+  <h1>すべての夜に、価値を。</h1>
+  <p>歌舞伎町で一番、記憶に残る時間を。</p>
+</div>
+
 <header>
   <h1>CLUB BOY</h1>
-  <p class="catch">歌舞伎町No.1ホストクラブ</p>
-  <p class="price">初回 ¥3,000 / 飲み放題</p>
-  <a href="https://lin.ee/〇〇〇" class="button">今すぐLINE予約</a>
+  <p>初回 ¥3,000 / 飲み放題</p>
+  <a href="https://lin.ee/〇〇〇" class="button">LINE予約</a>
 </header>
 
 <div class="section">
@@ -112,8 +159,8 @@ h1 {
 </div>
 
 <div class="section">
-  <h2>EVENT</h2>
-  <p>毎週金曜 シャンパンイベント開催</p>
+  <h2>INSTAGRAM</h2>
+  <a href="https://instagram.com/〇〇" class="button">Instagramを見る</a>
 </div>
 
 <div class="section">
@@ -121,9 +168,8 @@ h1 {
   <p>歌舞伎町○○ビル3F</p>
 </div>
 
-<div class="section">
-  <a href="https://lin.ee/〇〇〇" class="button">LINEで予約する</a>
-</div>
+<!-- 固定ボタン -->
+<a href="https://lin.ee/〇〇〇" class="fixed-line">LINE</a>
 
 </body>
 </html>
