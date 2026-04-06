@@ -14,45 +14,55 @@ body {
   overflow-x: hidden;
 }
 
-/* 背景の動き /
+/* 背景アニメーション /
 body::before {
   content: "";
   position: fixed;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,215,0,0.15), transparent 70%);
-  animation: bgMove 10s linear infinite;
+  background: radial-gradient(circle, rgba(255,215,0,0.2), transparent);
+  animation: bgMove 8s linear infinite;
+  z-index: -1;
 }
 @keyframes bgMove {
-  0% { transform: translate(-25%, -25%); }
+  0% { transform: translate(-20%, -20%); }
   50% { transform: translate(0%, 0%); }
-  100% { transform: translate(-25%, -25%); }
+  100% { transform: translate(-20%, -20%); }
 }
 
-/ 最初 /
-.hero {
-  height: 100vh;
+/ 初期画面 /
+#intro {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  z-index: 999;
 }
 
-.hero span {
+#intro h1 span {
   opacity: 0;
   display: inline-block;
   transform: translateY(20px);
 }
 
-/ スクロール表示 /
-.fade {
+/ フェードアウト /
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/ メイン /
+#main {
   opacity: 0;
-  transform: translateY(30px);
   transition: 1s;
 }
-.fade.show {
+#main.show {
   opacity: 1;
-  transform: translateY(0);
 }
 
 / ヘッダー /
@@ -61,35 +71,20 @@ header {
   padding: 40px 20px;
 }
 
+/ ボタン /
 .button {
-  display: inline-block;
   background: gold;
   color: black;
   padding: 15px 30px;
-  margin-top: 20px;
   text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
+  display: inline-block;
+  margin-top: 20px;
 }
 
 / キャスト /
-.cast-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  padding: 20px;
-}
-
 .cast {
-  background: #111;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: 0.3s;
+  margin: 20px;
 }
-.cast:hover {
-  transform: scale(1.08);
-}
-
 .cast img {
   width: 100%;
 }
@@ -100,7 +95,7 @@ header {
   bottom: 20px;
   right: 20px;
   background: #06C755;
-  padding: 18px;
+  padding: 20px;
   border-radius: 50%;
   animation: float 2s infinite;
 }
@@ -113,34 +108,36 @@ header {
 
 <body>
 
-<div class="hero">
+<!-- 最初の画面 -->
+<div id="intro">
   <h1 id="text"></h1>
 </div>
 
-<header class="fade">
-  <h1>CLUB BOY</h1>
-  <p>歌舞伎町No.1ホストクラブ</p>
-  <a href="https://lin.ee/〇〇〇" class="button">LINE予約</a>
-</header>
+<!-- メイン -->
+<div id="main">
+  <header>
+    <h1>CLUB BOY</h1>
+    <p>歌舞伎町No.1ホストクラブ</p>
+    <a href="https://lin.ee/〇〇〇" class="button">LINE予約</a>
+  </header>
 
-<div class="fade">
   <h2 style="text-align:center;">CAST</h2>
-  <div class="cast-grid">
-    <div class="cast">
-      <img src="https://picsum.photos/300">
-      <p>社長 蒼井ゆうと</p>
-    </div>
-    <div class="cast">
-      <img src="https://picsum.photos/300">
-      <p>PICK UP 咲夜蓮</p>
-    </div>
+
+  <div class="cast">
+    <img src="https://picsum.photos/400">
+    <p>代表 REN</p>
+  </div>
+
+  <div class="cast">
+    <img src="https://picsum.photos/401">
+    <p>No.1 翔</p>
   </div>
 </div>
 
 <a href="https://lin.ee/〇〇〇" class="fixed-line">LINE</a>
 
 <script>
-// 文字が1文字ずつ出る
+// 文字アニメーション
 const text = "すべての夜に、価値を。";
 const el = document.getElementById("text");
 
@@ -155,16 +152,11 @@ text.split("").forEach((char, i) => {
   }, i * 100);
 });
 
-// スクロールで表示
-const fades = document.querySelectorAll(".fade");
-window.addEventListener("scroll", () => {
-  fades.forEach(f => {
-    const rect = f.getBoundingClientRect().top;
-    if (rect < window.innerHeight - 50) {
-      f.classList.add("show");
-    }
-  });
-});
+// 画面切り替え
+setTimeout(() => {
+  document.getElementById("intro").classList.add("fade-out");
+  document.getElementById("main").classList.add("show");
+}, 3000);
 </script>
 
 </body>
