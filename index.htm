@@ -92,22 +92,29 @@ body::before{
 
 /* LINEボタン */
 .line-btn{
- position:fixed;
- bottom:20px;
- right:20px;
+ position:fixed !important;
+ bottom:20px !important;
+ right:20px !important;
+
+ width:70px;
+ height:70px;
+
  background:#06C755;
- padding:18px 20px;
- border-radius:50%;
- z-index:9999; /* ← これ超重要 */
  color:white;
- text-decoration:none;
  font-weight:bold;
- animation:float 2s infinite;
+ text-decoration:none;
+
  display:flex;
  align-items:center;
  justify-content:center;
- width:70px;
- height:70px;
+
+ border-radius:50%;
+
+ z-index:99999 !important;
+
+ box-shadow:0 0 20px rgba(0,0,0,0.5);
+
+ animation:float 2s infinite;
 }
  h1{
  font-size:40px;
