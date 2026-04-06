@@ -96,9 +96,18 @@ body::before{
  bottom:20px;
  right:20px;
  background:#06C755;
- padding:20px;
+ padding:18px 20px;
  border-radius:50%;
+ z-index:9999; /* ← これ超重要 */
+ color:white;
+ text-decoration:none;
+ font-weight:bold;
  animation:float 2s infinite;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ width:70px;
+ height:70px;
 }
  h1{
  font-size:40px;
