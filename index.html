@@ -2,7 +2,9 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>CLUB BOY - 歌舞伎町ホストクラブ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLUB BOY</title>
+
 <style>
 body {
   margin: 0;
@@ -10,28 +12,59 @@ body {
   background: black;
   color: white;
 }
+
 header {
+  background: linear-gradient(to right, black, gold);
   text-align: center;
-  padding: 40px;
-  background: linear-gradient(to right, purple, black);
+  padding: 60px 20px;
 }
+
 h1 {
-  font-size: 48px;
+  font-size: 50px;
+  margin: 0;
 }
-.section {
-  padding: 40px;
-  text-align: center;
+
+.catch {
+  font-size: 18px;
+  margin-top: 10px;
 }
-.cast img {
-  width: 150px;
-  border-radius: 10px;
-}
+
 .button {
-  background: purple;
+  display: inline-block;
+  background: gold;
+  color: black;
   padding: 15px 30px;
-  color: white;
+  margin-top: 20px;
   text-decoration: none;
   border-radius: 5px;
+  font-weight: bold;
+}
+
+.section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.cast-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.cast {
+  background: #111;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.cast img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.price {
+  font-size: 20px;
+  margin: 10px 0;
 }
 </style>
 </head>
@@ -40,26 +73,47 @@ h1 {
 
 <header>
   <h1>CLUB BOY</h1>
-  <p>歌舞伎町No.1ホストクラブ</p>
+  <p class="catch">歌舞伎町No.1ホストクラブ</p>
+  <p class="price">初回 ¥3,000 / 飲み放題</p>
+  <a href="https://lin.ee/〇〇〇" class="button">今すぐLINE予約</a>
 </header>
 
 <div class="section">
   <h2>CAST</h2>
-  <div class="cast">
-    <img src="host1.jpg">
-    <p>代表：REN</p>
+  <div class="cast-grid">
+
+    <div class="cast">
+      <img src="https://via.placeholder.com/300">
+      <p>代表 REN</p>
+    </div>
+
+    <div class="cast">
+      <img src="https://via.placeholder.com/300">
+      <p>No.1 翔</p>
+    </div>
+
+    <div class="cast">
+      <img src="https://via.placeholder.com/300">
+      <p>幹部 裕也</p>
+    </div>
+
+    <div class="cast">
+      <img src="https://via.placeholder.com/300">
+      <p>新人 蓮</p>
+    </div>
+
   </div>
 </div>
 
 <div class="section">
   <h2>SYSTEM</h2>
-  <p>初回：¥3,000 / 60分 飲み放題</p>
+  <p>初回：¥3,000（60分 飲み放題）</p>
   <p>通常：¥5,000〜</p>
 </div>
 
 <div class="section">
   <h2>EVENT</h2>
-  <p>毎週金曜：シャンパンイベント</p>
+  <p>毎週金曜 シャンパンイベント開催</p>
 </div>
 
 <div class="section">
@@ -68,7 +122,7 @@ h1 {
 </div>
 
 <div class="section">
-  <a href="#" class="button">LINEで予約</a>
+  <a href="https://lin.ee/〇〇〇" class="button">LINEで予約する</a>
 </div>
 
 </body>
