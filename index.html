@@ -14,14 +14,14 @@ body {
   overflow-x: hidden;
 }
 
-/* 背景アニメーション /
+/* 動く背景 /
 body::before {
   content: "";
   position: fixed;
   width: 200%;
   height: 200%;
   background: radial-gradient(circle, rgba(255,215,0,0.2), transparent);
-  animation: bgMove 8s linear infinite;
+  animation: bgMove 10s linear infinite;
   z-index: -1;
 }
 @keyframes bgMove {
@@ -30,7 +30,7 @@ body::before {
   100% { transform: translate(-20%, -20%); }
 }
 
-/ 初期画面 /
+/ 最初 /
 #intro {
   position: fixed;
   width: 100%;
@@ -41,14 +41,13 @@ body::before {
   align-items: center;
   z-index: 999;
 }
-
-#intro h1 span {
+#intro span {
   opacity: 0;
-  display: inline-block;
   transform: translateY(20px);
+  display: inline-block;
 }
 
-/ フェードアウト /
+/ フェード /
 .fade-out {
   animation: fadeOut 1s forwards;
 }
@@ -75,21 +74,31 @@ header {
 .button {
   background: gold;
   color: black;
-  padding: 15px 30px;
+  padding: 15px 25px;
   text-decoration: none;
   display: inline-block;
-  margin-top: 20px;
+  margin: 10px;
+  border-radius: 5px;
 }
 
-/ キャスト /
+/ キャスト横スクロール /
+.cast-wrap {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 20px;
+}
 .cast {
-  margin: 20px;
+  min-width: 200px;
+  background: #111;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .cast img {
   width: 100%;
 }
 
-/ LINEボタン */
+/ LINE固定 */
 .fixed-line {
   position: fixed;
   bottom: 20px;
@@ -108,7 +117,7 @@ header {
 
 <body>
 
-<!-- 最初の画面 -->
+<!-- 最初 -->
 <div id="intro">
   <h1 id="text"></h1>
 </div>
@@ -119,25 +128,39 @@ header {
     <h1>CLUB BOY</h1>
     <p>歌舞伎町No.1ホストクラブ</p>
     <a href="https://lin.ee/〇〇〇" class="button">LINE予約</a>
+    <a href="https://instagram.com/〇〇" class="button">Instagram</a>
   </header>
 
   <h2 style="text-align:center;">CAST</h2>
 
-  <div class="cast">
-    <img src="https://picsum.photos/400">
-    <p>代表 REN</p>
+  <div class="cast-wrap">
+
+    <div class="cast">
+      <img src="https://picsum.photos/300?1">
+      <p>代表 REN</p>
+      <a href="https://lin.ee/〇〇〇" class="button">指名する</a>
+    </div>
+
+    <div class="cast">
+      <img src="https://picsum.photos/300?2">
+      <p>No.1 翔</p>
+      <a href="https://lin.ee/〇〇〇" class="button">指名する</a>
+    </div>
+
+    <div class="cast">
+      <img src="https://picsum.photos/300?3">
+      <p>幹部 裕也</p>
+      <a href="https://lin.ee/〇〇〇" class="button">指名する</a>
+    </div>
+
   </div>
 
-  <div class="cast">
-    <img src="https://picsum.photos/401">
-    <p>No.1 翔</p>
-  </div>
 </div>
 
 <a href="https://lin.ee/〇〇〇" class="fixed-line">LINE</a>
 
 <script>
-// 文字アニメーション
+// 文字演出
 const text = "すべての夜に、価値を。";
 const el = document.getElementById("text");
 
@@ -149,7 +172,7 @@ text.split("").forEach((char, i) => {
   setTimeout(() => {
     span.style.opacity = 1;
     span.style.transform = "translateY(0)";
-  }, i * 100);
+  }, i * 80);
 });
 
 // 画面切り替え
