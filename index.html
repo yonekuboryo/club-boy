@@ -7,179 +7,78 @@
 
 <style>
 body {
-  margin: 0;
-  font-family: sans-serif;
-  background: black;
-  color: white;
-  overflow-x: hidden;
+ margin:0;
+ background:black;
+ color:white;
+ font-family:sans-serif;
+ text-align:center;
 }
 
-/* 動く背景 /
-body::before {
-  content: "";
-  position: fixed;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,215,0,0.2), transparent);
-  animation: bgMove 10s linear infinite;
-  z-index: -1;
-}
-@keyframes bgMove {
-  0% { transform: translate(-20%, -20%); }
-  50% { transform: translate(0%, 0%); }
-  100% { transform: translate(-20%, -20%); }
-}
-
-/ 最初 /
+/* 最初の画面 /
 #intro {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-#intro span {
-  opacity: 0;
-  transform: translateY(20px);
-  display: inline-block;
-}
-
-/ フェード /
-.fade-out {
-  animation: fadeOut 1s forwards;
-}
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
+ position:fixed;
+ width:100%;
+ height:100%;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ background:black;
+ z-index:999;
 }
 
 / メイン /
 #main {
-  opacity: 0;
-  transition: 1s;
-}
-#main.show {
-  opacity: 1;
+ opacity:0;
+ transition:1s;
 }
 
-/ ヘッダー /
-header {
-  text-align: center;
-  padding: 40px 20px;
+.show {
+ opacity:1;
 }
 
-/ ボタン /
-.button {
-  background: gold;
-  color: black;
-  padding: 15px 25px;
-  text-decoration: none;
-  display: inline-block;
-  margin: 10px;
-  border-radius: 5px;
-}
-
-/ キャスト横スクロール /
-.cast-wrap {
-  display: flex;
-  overflow-x: auto;
-  gap: 15px;
-  padding: 20px;
-}
-.cast {
-  min-width: 200px;
-  background: #111;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.cast img {
-  width: 100%;
-}
-
-/ LINE固定 */
-.fixed-line {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #06C755;
-  padding: 20px;
-  border-radius: 50%;
-  animation: float 2s infinite;
-}
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+/ フェード /
+.fade {
+ opacity:0;
+ transition:1s;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 最初 -->
 <div id="intro">
-  <h1 id="text"></h1>
+ <h1 id="text"></h1>
 </div>
 
-<!-- メイン -->
 <div id="main">
-  <header>
-    <h1>CLUB BOY</h1>
-    <p>歌舞伎町No.1ホストクラブ</p>
-    <a href="https://lin.ee/〇〇〇" class="button">LINE予約</a>
-    <a href="https://instagram.com/〇〇" class="button">Instagram</a>
-  </header>
-
-  <h2 style="text-align:center;">CAST</h2>
-
-  <div class="cast-wrap">
-
-    <div class="cast">
-      <img src="https://picsum.photos/300?1">
-      <p>代表 REN</p>
-      <a href="https://lin.ee/〇〇〇" class="button">指名する</a>
-    </div>
-
-    <div class="cast">
-      <img src="https://picsum.photos/300?2">
-      <p>No.1 翔</p>
-      <a href="https://lin.ee/〇〇〇" class="button">指名する</a>
-    </div>
-
-    <div class="cast">
-      <img src="https://picsum.photos/300?3">
-      <p>幹部 裕也</p>
-      <a href="https://lin.ee/〇〇〇" class="button">指名する</a>
-    </div>
-
-  </div>
-
+ <h1>CLUB BOY</h1>
+ <p>歌舞伎町No.1ホストクラブ</p>
 </div>
-
-<a href="https://lin.ee/〇〇〇" class="fixed-line">LINE</a>
 
 <script>
-// 文字演出
 const text = "すべての夜に、価値を。";
 const el = document.getElementById("text");
 
-text.split("").forEach((char, i) => {
-  const span = document.createElement("span");
-  span.textContent = char;
-  el.appendChild(span);
+text.split("").forEach((c,i)=>{
+ const span = document.createElement("span");
+ span.textContent = c;
+ span.style.opacity = 0;
+ span.style.display = "inline-block";
+ span.style.transform = "translateY(20px)";
+ span.style.transition = "0.3s";
+ el.appendChild(span);
 
-  setTimeout(() => {
-    span.style.opacity = 1;
-    span.style.transform = "translateY(0)";
-  }, i * 80);
+ setTimeout(()=>{
+  span.style.opacity = 1;
+  span.style.transform = "translateY(0)";
+ }, i100);
 });
 
 // 画面切り替え
-setTimeout(() => {
-  document.getElementById("intro").classList.add("fade-out");
-  document.getElementById("main").classList.add("show");
-}, 3000);
+setTimeout(()=>{
+ document.getElementById("intro").classList.add("fade");
+ document.getElementById("main").classList.add("show");
+},3000);
 </script>
 
 </body>
