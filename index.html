@@ -62,14 +62,46 @@ window.onload = function(){
   el.appendChild(span);
 
   setTimeout(()=>{
-   span.style.opacity = 1;
-  }, i * 100);
- });
+  const intro = document.getElementById("intro");
+  const main = document.getElementById("main");
+
+  intro.style.opacity = 0;
+  intro.style.transition = "1s";
+
+  setTimeout(()=>{
+    intro.style.display = "none";
+    main.classList.add("show");
+  },1000);
+
+},3000);
 
  setTimeout(()=>{
-  document.getElementById("intro").style.display="none";
-  document.getElementById("main").classList.add("show");
- },3000);
+  const intro = document.getElementById("intro");
+  const main = document.getElementById("main");
+
+  intro.style.opacity = 0;
+  intro.style.transition = "1s";
+
+  setTimeout(()=>{
+const intro = document.getElementById(“intro”);
+const main = document.getElementById(“main”);
+
+intro.style.opacity = 0;
+intro.style.transition = “1s”;
+
+setTimeout(()=>{
+const intro = document.getElementById(“intro”);
+const main = document.getElementById(“main”);
+
+intro.style.opacity = 0;
+intro.style.transition = “1s”;
+
+setTimeout(()=>{
+intro.style.display = “none”;
+main.classList.add(“show”);
+},1000);
+
+},3000);
 
 }
 </script>
