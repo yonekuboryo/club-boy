@@ -100,9 +100,34 @@ body::before{
  border-radius:50%;
  animation:float 2s infinite;
 }
+ h1{
+ font-size:40px;
+ letter-spacing:3px;
+ animation: glow 2s infinite alternate;
+}
+ 
+@keyframes glow{
+ from{ text-shadow:0 0 10px gold; }
+ to{ text-shadow:0 0 30px gold; }
+}
 @keyframes float{
  0%,100%{transform:translateY(0)}
  50%{transform:translateY(-10px)}
+}
+ .line-btn{
+ animation:float 2s infinite, pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+ 0%{transform:scale(1)}
+ 50%{transform:scale(1.1)}
+ 100%{transform:scale(1)}
+}
+ .cast{
+ transition:0.3s;
+}
+.cast:hover{
+ transform:scale(1.05);
 }
 </style>
 </head>
