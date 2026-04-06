@@ -92,9 +92,9 @@ body::before{
 
 /* LINEボタン */
 .line-btn{
- position:fixed !important;
- bottom:20px !important;
- right:20px !important;
+ position:fixed;
+ bottom:20px;
+ right:20px;
 
  width:70px;
  height:70px;
@@ -110,16 +110,11 @@ body::before{
 
  border-radius:50%;
 
- z-index:99999 !important;
+ z-index:99999;
 
  box-shadow:0 0 20px rgba(0,0,0,0.5);
 
- animation:float 2s infinite;
-}
- h1{
- font-size:40px;
- letter-spacing:3px;
- animation: glow 2s infinite alternate;
+ animation:pulse 1.5s infinite; /* ← これだけにする */
 }
  
 @keyframes glow{
