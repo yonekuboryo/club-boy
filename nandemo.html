@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なんでも屋サービス</title>
+
+<style>
+body{
+ margin:0;
+ font-family:sans-serif;
+ background:#111;
+ color:white;
+}
+
+/* ヘッダー */
+.header{
+ padding:20px;
+ text-align:center;
+ background:black;
+ font-size:24px;
+ letter-spacing:2px;
+}
+
+/* メイン */
+.main{
+ padding:30px;
+ text-align:center;
+}
+
+/* サービス */
+.services{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ gap:15px;
+}
+.service{
+ background:#222;
+ padding:15px;
+ width:150px;
+ border-radius:10px;
+}
+
+/* スタッフ */
+.staff-wrap{
+ display:flex;
+ overflow-x:auto;
+ gap:15px;
+ padding:20px;
+}
+.staff{
+ min-width:180px;
+ background:#222;
+ border-radius:10px;
+ overflow:hidden;
+ flex-shrink:0;
+}
+.staff img{
+ width:100%;
+}
+.staff p{
+ padding:10px;
+ font-size:14px;
+}
+
+/* ボタン */
+.button{
+ display:inline-block;
+ margin-top:20px;
+ padding:15px 25px;
+ background:#06C755;
+ color:white;
+ text-decoration:none;
+ border-radius:5px;
+}
+
+/* フッター */
+.footer{
+ text-align:center;
+ padding:20px;
+ font-size:12px;
+ color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+ なんでも屋サービス
+</div>
+
+<div class="main">
+
+ <h2>サービス内容</h2>
+
+ <div class="services">
+  <div class="service">引っ越し手伝い</div>
+  <div class="service">掃除代行</div>
+  <div class="service">買い物代行</div>
+  <div class="service">力仕事</div>
+  <div class="service">付き添い</div>
+ </div>
+
+ <h2>スタッフ紹介</h2>
+
+ <div class="staff-wrap">
+
+  <div class="staff">
+   <img src="https://picsum.photos/200?1">
+   <p>代表 田中<br>何でも対応します！</p>
+  </div>
+
+  <div class="staff">
+   <img src="https://picsum.photos/200?2">
+   <p>スタッフ 山本<br>力仕事得意</p>
+  </div>
+
+  <div class="staff">
+   <img src="https://picsum.photos/200?3">
+   <p>スタッフ 佐藤<br>丁寧対応</p>
+  </div>
+
+ </div>
+
+ <a href="#" class="button">LINEで依頼する</a>
+
+</div>
+
+<div class="footer">
+ © 2026 なんでも屋サービス
+</div>
+
+</body>
+</html>
