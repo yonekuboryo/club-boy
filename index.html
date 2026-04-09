@@ -136,10 +136,20 @@ body{
  font-size:13px;
 }
 
- .staff-wrap{
- overflow:hidden;
+ /* 横スクロール＋操作OK */
+.staff-wrap{
+ overflow-x:auto;
+ overflow-y:hidden;
+ -webkit-overflow-scrolling: touch;
+ cursor:grab;
 }
 
+/* スクロールバー消す */
+.staff-wrap::-webkit-scrollbar{
+ display:none;
+}
+
+/* トラック */
 .staff-track{
  display:flex;
  width:max-content;
@@ -383,6 +393,29 @@ window.addEventListener('scroll', () => {
   logo.classList.remove('small');
  }
 });
+ // ===== 手動スクロールで自動停止 =====
+const track = document.querySelector('.staff-track');
+const wrap = document.querySelector('.staff-wrap');
+
+// タッチ開始 → 停止
+wrap.addEventListener('touchstart', () => {
+ track.style.animationPlayState = 'paused';
+});
+
+// タッチ終了 → 再開
+wrap.addEventListener('touchend', () => {
+ track.style.animationPlayState = 'running';
+});
+
+// PC操作
+wrap.addEventListener('mousedown', () => {
+ track.style.animationPlayState = 'paused';
+});
+
+wrap.addEventListener('mouseup', () => {
+ track.style.animationPlayState = 'running';
+});
+
 </script>
 </body>
 </html>
