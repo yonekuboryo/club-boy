@@ -114,9 +114,10 @@ body{
 }
 
 .staff-wrap{
- display:flex;
  overflow-x:auto;
- gap:15px;
+ overflow-y:hidden;
+ -webkit-overflow-scrolling: touch;
+ cursor:grab;
  padding:10px;
 }
 
@@ -153,7 +154,7 @@ body{
 .staff-track{
  display:flex;
  width:max-content;
- animation: scrollStaff 20s linear infinite;
+ animation: scrollStaff 30s linear infinite;
 }
 
 /* 無限スクロール */
