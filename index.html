@@ -399,28 +399,29 @@ document.querySelectorAll('.call-btn').forEach(btn=>{
   console.log("電話クリック数:", callClick);
  });
 });
- const logo = document.querySelector('.logo');
+const logo = document.querySelector('.logo');
+const wrap = document.querySelector('.staff-wrap');
+
 window.addEventListener('scroll', () => {
  if(window.scrollY > 100){
   logo.classList.add('small');
  }else{
   logo.classList.remove('small');
  }
+});
 
 // ===== 無限ループ =====
-const wrap = document.querySelector('.staff-wrap');
-
 let speed = 0.5;
 let isDown = false;
 let startX;
 let scrollLeft;
 
-// 初期位置（超重要）
+// 初期位置
 window.addEventListener('load', () => {
-  wrap.scrollLeft = wrap.scrollWidth / 3;
+ wrap.scrollLeft = wrap.scrollWidth / 3;
 });
 
-// 無限ループ
+// ループ
 function autoScroll(){
  if(!isDown){
   wrap.scrollLeft += speed;
