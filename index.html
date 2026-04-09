@@ -114,10 +114,8 @@ body{
 }
 
 .staff-wrap{
- overflow-x:auto;
- overflow-y:hidden;
- -webkit-overflow-scrolling: touch;
- cursor:grab;
+ overflow: hidden; /* ←これに変える */
+ cursor: grab;
 }
  
 .staff-track{
@@ -402,81 +400,84 @@ document.querySelectorAll('.call-btn').forEach(btn=>{
 const logo = document.querySelector('.logo');
 const wrap = document.querySelector('.staff-wrap');
 
-window.addEventListener('scroll', () => {
- if(window.scrollY > 100){
-  logo.classList.add('small');
- }else{
-  logo.classList.remove('small');
- }
-});
-
-// ===== 無限ループ =====
 let speed = 0.5;
 let isDown = false;
 let startX;
 let scrollLeft;
 
-// 初期位置
+// ★重要：最初は中央に配置
 window.addEventListener('load', () => {
- wrap.scrollLeft = wrap.scrollWidth / 3;
+  const oneSetWidth = wrap.scrollWidth / 3;
+  wrap.scrollLeft = oneSetWidth;
 });
 
-// ループ
+// ★無限ループ（ズレ補正あり）
 function autoScroll(){
- if(!isDown){
-  wrap.scrollLeft += speed;
+  if(!isDown){
+    wrap.scrollLeft += speed;
 
-  const loopPoint = wrap.scrollWidth / 3;
+    const oneSetWidth = wrap.scrollWidth / 3;
 
-  if(wrap.scrollLeft >= loopPoint * 2){
-    wrap.scrollLeft = loopPoint;
+    // →右に行きすぎたら中央へ戻す
+    if(wrap.scrollLeft >= oneSetWidth * 2){
+      wrap.scrollLeft -= oneSetWidth;
+    }
+
+    // →左に行きすぎたら中央へ戻す（←これが重要）
+    if(wrap.scrollLeft <= 0){
+      wrap.scrollLeft += oneSetWidth;
+    }
   }
- }
- requestAnimationFrame(autoScroll);
+
+  requestAnimationFrame(autoScroll);
 }
 autoScroll();
 
+
 // ===== PCドラッグ =====
 wrap.addEventListener('mousedown', (e) => {
- isDown = true;
- startX = e.pageX;
- scrollLeft = wrap.scrollLeft;
+  isDown = true;
+  startX = e.pageX;
+  scrollLeft = wrap.scrollLeft;
 });
 
 wrap.addEventListener('mouseup', () => {
- isDown = false;
+  isDown = false;
 });
 
 wrap.addEventListener('mouseleave', () => {
- isDown = false;
+  isDown = false;
 });
 
 wrap.addEventListener('mousemove', (e) => {
- if(!isDown) return;
- e.preventDefault();
+  if(!isDown) return;
+  e.preventDefault();
 
- const x = e.pageX;
- const walk = (x - startX) * 2;
- wrap.scrollLeft = scrollLeft - walk;
+  const x = e.pageX;
+  const walk = (x - startX) * 2;
+  wrap.scrollLeft = scrollLeft - walk;
 });
+
 
 // ===== スマホ =====
 wrap.addEventListener('touchstart', (e) => {
- isDown = true;
- startX = e.touches[0].pageX;
- scrollLeft = wrap.scrollLeft;
+  isDown = true;
+  startX = e.touches[0].pageX;
+  scrollLeft = wrap.scrollLeft;
 });
 
 wrap.addEventListener('touchmove', (e) => {
- if(!isDown) return;
+  if(!isDown) return;
+  
+ e.preventDefault();
 
- const x = e.touches[0].pageX;
- const walk = (x - startX) * 2;
- wrap.scrollLeft = scrollLeft - walk;
+  const x = e.touches[0].pageX;
+  const walk = (x - startX) * 2;
+  wrap.scrollLeft = scrollLeft - walk;
 });
 
 wrap.addEventListener('touchend', () => {
- isDown = false;
+  isDown = false;
 });
  
 </script>
