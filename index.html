@@ -30,8 +30,14 @@ body{
 }
 
 .logo{
- width:110px;
- margin-bottom:20px;
+ width:220px;
+ margin-bottom:30px;
+ filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+}
+ @media(max-width:600px){
+ .logo{
+  width:180px;
+ }
 }
 
 .highlight{
@@ -327,6 +333,48 @@ document.querySelectorAll('.staff').forEach(item=>{
  });
  el.classList.toggle('active');
 }
+ 
+// ===== スタッフ開閉 =====
+function toggleStaff(el){
+ document.querySelectorAll('.staff').forEach(item=>{
+  if(item !== el){
+   item.classList.remove('active');
+  }
+ });
+ el.classList.toggle('active');
+}
+
+// ===== スクロールでボタン表示 =====
+const lineBtn = document.querySelector('.fixed-line');
+const callBtn = document.querySelector('.fixed-call');
+
+window.addEventListener('scroll', () => {
+ if(window.scrollY > 300){
+  lineBtn.classList.add('show-btn');
+  callBtn.classList.add('show-btn');
+ } else {
+  lineBtn.classList.remove('show-btn');
+  callBtn.classList.remove('show-btn');
+ }
+});
+
+// ===== クリック数カウント =====
+let lineClick = 0;
+let callClick = 0;
+
+document.querySelectorAll('.line-btn').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+  lineClick++;
+  console.log("LINEクリック数:", lineClick);
+ });
+});
+
+document.querySelectorAll('.call-btn').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+  callClick++;
+  console.log("電話クリック数:", callClick);
+ });
+});
 </script>
 </body>
 </html>
