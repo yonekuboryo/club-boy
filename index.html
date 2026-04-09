@@ -406,21 +406,26 @@ window.addEventListener('scroll', () => {
  }else{
   logo.classList.remove('small');
  }
-});
- 
+
+// ===== 無限ループ =====
 const wrap = document.querySelector('.staff-wrap');
 
-let speed = 0.5; // 自動スクロール速度
+let speed = 0.5;
 let isDown = false;
 let startX;
 let scrollLeft;
 
-// ===== 無限ループ =====
+// 初期位置（超重要）
+window.addEventListener('load', () => {
+  wrap.scrollLeft = wrap.scrollWidth / 3;
+});
+
+// 無限ループ
 function autoScroll(){
  if(!isDown){
   wrap.scrollLeft += speed;
 
-  const loopPoint = wrap.scrollWidth / 3; // ←3セットにしたから1/3
+  const loopPoint = wrap.scrollWidth / 3;
 
   if(wrap.scrollLeft >= loopPoint * 2){
     wrap.scrollLeft = loopPoint;
