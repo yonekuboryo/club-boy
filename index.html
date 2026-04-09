@@ -404,28 +404,24 @@ const wrap = document.querySelector('.staff-wrap');
 
 let speed = 0.5;
 let isDown = false;
-let startX;
-let scrollLeft;
 
-// ★重要：最初は中央に配置
+// 初期位置
 window.addEventListener('load', () => {
   const oneSetWidth = wrap.scrollWidth / 3;
   wrap.scrollLeft = oneSetWidth;
 });
 
-// ★無限ループ（ズレ補正あり）
+// 無限ループ
 function autoScroll(){
   if(!isDown){
     wrap.scrollLeft += speed;
 
     const oneSetWidth = wrap.scrollWidth / 3;
 
-    // →右に行きすぎたら中央へ戻す
     if(wrap.scrollLeft >= oneSetWidth * 2){
       wrap.scrollLeft -= oneSetWidth;
     }
 
-    // →左に行きすぎたら中央へ戻す（←これが重要）
     if(wrap.scrollLeft <= 0){
       wrap.scrollLeft += oneSetWidth;
     }
