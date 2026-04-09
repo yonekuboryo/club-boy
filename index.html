@@ -115,10 +115,11 @@ body{
 
 .staff-wrap{
  overflow-x:auto;
- overflow:hidden;
- width:100%;
+ overflow-y:hidden;
+ -webkit-overflow-scrolling: touch;
+ cursor:grab;
 }
-
+ 
 .staff-track{
  display:flex;
  width:calc(120px * 8); /* ←人数×2セット分 */
@@ -357,20 +358,6 @@ body{
 
 <script>
 
-// ===== スクロールでボタン表示 =====
-const lineBtn = document.querySelector('.fixed-line');
-const callBtn = document.querySelector('.fixed-call');
-
-window.addEventListener('scroll', () => {
- if(window.scrollY > 300){
-  lineBtn.classList.add('show-btn');
-  callBtn.classList.add('show-btn');
- } else {
-  lineBtn.classList.remove('show-btn');
-  callBtn.classList.remove('show-btn');
- }
-});
-
 // ===== クリック数カウント =====
 let lineClick = 0;
 let callClick = 0;
@@ -397,28 +384,6 @@ window.addEventListener('scroll', () => {
  }
 });
  
-const track = document.getElementById('staffTrack');
-const wrap = document.querySelector('.staff-wrap');
-
-// スマホ
-wrap.addEventListener('touchstart', () => {
- track.style.animationPlayState = 'paused';
-});
-
-wrap.addEventListener('touchend', () => {
- track.style.animationPlayState = 'running';
-});
-
-// PC
-wrap.addEventListener('mouseenter', () => {
- track.style.animationPlayState = 'paused';
-});
-
-wrap.addEventListener('mouseleave', () => {
- track.style.animationPlayState = 'running';
-
-});
-
 const wrap = document.querySelector('.staff-wrap');
 const track = document.querySelector('.staff-track');
 
@@ -426,18 +391,17 @@ let isDown = false;
 let startX;
 let scrollLeft;
 
-// ===== スワイプ開始 =====
+// ===== PCドラッグ =====
 wrap.addEventListener('mousedown', (e) => {
  isDown = true;
  startX = e.pageX - wrap.offsetLeft;
  scrollLeft = wrap.scrollLeft;
-
- track.style.animationPlayState = 'paused'; // 止める
+ track.style.animationPlayState = 'paused';
 });
 
 wrap.addEventListener('mouseleave', () => {
  isDown = false;
- track.style.animationPlayState = 'running'; // 再開
+ track.style.animationPlayState = 'running';
 });
 
 wrap.addEventListener('mouseup', () => {
@@ -448,13 +412,12 @@ wrap.addEventListener('mouseup', () => {
 wrap.addEventListener('mousemove', (e) => {
  if(!isDown) return;
  e.preventDefault();
-
  const x = e.pageX - wrap.offsetLeft;
- const walk = (x - startX) * 2; // ←スピード調整
+ const walk = (x - startX) * 2;
  wrap.scrollLeft = scrollLeft - walk;
 });
 
-// ===== スマホ対応 =====
+// ===== スマホ =====
 wrap.addEventListener('touchstart', (e) => {
  startX = e.touches[0].pageX;
  scrollLeft = wrap.scrollLeft;
@@ -470,6 +433,7 @@ wrap.addEventListener('touchmove', (e) => {
 wrap.addEventListener('touchend', () => {
  track.style.animationPlayState = 'running';
 });
+ 
 </script>
 </body>
 </html>
