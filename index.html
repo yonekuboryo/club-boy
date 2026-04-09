@@ -323,6 +323,29 @@ body{
      <p>あいひ</p>
     </a>
 
+       <!-- ★3セット（完全コピー） -->
+   <div class="staff-group">
+
+    <a href="yonekubo.html" class="staff">
+     <img src="yonekubo.jpg">
+     <p>米久保</p>
+    </a>
+
+    <a href="santosu.html" class="staff">
+     <img src="santosu.jpg">
+     <p>サントス</p>
+    </a>
+
+    <a href="satou.html" class="staff">
+     <img src="satou.jpg">
+     <p>佐藤</p>
+    </a>
+
+    <a href="aihi.html" class="staff">
+     <img src="aihi.jpg">
+     <p>あいひ</p>
+    </a>
+
    </div>
 
   </div>
@@ -395,9 +418,10 @@ function autoScroll(){
  if(!isDown){
   wrap.scrollLeft += speed;
 
-  // ★ループ処理
-  if(wrap.scrollLeft >= wrap.scrollWidth / 2){
-   wrap.scrollLeft = 0;
+  const loopPoint = wrap.scrollWidth / 3; // ←3セットにしたから1/3
+
+  if(wrap.scrollLeft >= loopPoint * 2){
+    wrap.scrollLeft = loopPoint;
   }
  }
  requestAnimationFrame(autoScroll);
