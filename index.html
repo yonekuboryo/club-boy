@@ -402,33 +402,20 @@ const logo = document.querySelector('.logo');
 const wrap = document.querySelector('.staff-wrap');
 
 let speed = 0.5;
-let isDown = false;
 
-// 初期位置
-window.addEventListener('load', () => {
-  const oneSetWidth = wrap.scrollWidth / 3;
-  wrap.scrollLeft = oneSetWidth;
-});
-
-// 無限ループ
 function autoScroll(){
-  if(!isDown){
-    wrap.scrollLeft += speed;
+  wrap.scrollLeft += speed;
 
-    const oneSetWidth = wrap.scrollWidth / 3;
-
-    if(wrap.scrollLeft >= oneSetWidth * 2){
-      wrap.scrollLeft -= oneSetWidth;
-    }
-
-    if(wrap.scrollLeft <= 0){
-      wrap.scrollLeft += oneSetWidth;
-    }
+  if (wrap.scrollLeft >= wrap.scrollWidth / 2) {
+    wrap.scrollLeft = 0;
   }
 
   requestAnimationFrame(autoScroll);
 }
-autoScroll();
+
+window.onload = () => {
+  autoScroll();
+};
 
 
 // ===== PCドラッグ =====
