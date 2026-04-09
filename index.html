@@ -405,20 +405,20 @@ window.addEventListener('scroll', () => {
  }
 });
  // ===== 手動スクロールで自動停止 =====
+<script>
 const track = document.querySelector('.staff-track');
 const wrap = document.querySelector('.staff-wrap');
 
-// タッチ開始 → 停止
+// スマホ
 wrap.addEventListener('touchstart', () => {
  track.style.animationPlayState = 'paused';
 });
 
-// タッチ終了 → 再開
 wrap.addEventListener('touchend', () => {
  track.style.animationPlayState = 'running';
 });
 
-// PC操作
+// PC
 wrap.addEventListener('mousedown', () => {
  track.style.animationPlayState = 'paused';
 });
@@ -426,7 +426,6 @@ wrap.addEventListener('mousedown', () => {
 wrap.addEventListener('mouseup', () => {
  track.style.animationPlayState = 'running';
 });
-
 </script>
 </body>
 </html>
