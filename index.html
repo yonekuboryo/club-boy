@@ -404,6 +404,8 @@ const wrap = document.querySelector('.staff-wrap');
 let speed = 0.5;
 let isDown = false;
 let oneSetWidth = 0;
+let startX;
+let scrollLeft;
 
 function initScroll(){
   oneSetWidth = wrap.scrollWidth / 3;
@@ -426,7 +428,6 @@ function autoScroll(){
   requestAnimationFrame(autoScroll);
 }
 
-// 初期化
 window.addEventListener('load', () => {
   initScroll();
   autoScroll();
