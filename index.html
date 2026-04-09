@@ -113,62 +113,50 @@ body{
  max-width:160px;
 }
 
-/* スタッフ全体 */
 .staff-wrap{
- overflow-x:auto;
- overflow-y:hidden;
- -webkit-overflow-scrolling: touch;
- padding:10px;
- cursor:grab;
+ overflow:hidden; /* ←これ重要 */
+ width:100%;
 }
 
-/* スクロールバー消す */
-.staff-wrap::-webkit-scrollbar{
- display:none;
-}
-
-/* 横並び */
 .staff-track{
  display:flex;
  width:max-content;
- animation: scrollStaff 25s linear infinite;
+ animation: scrollLoop 20s linear infinite;
 }
 
-/* グループ */
 .staff-group{
  display:flex;
 }
 
-/* カード */
 .staff{
- flex-shrink:0;
- width:120px;
+ width:110px;
  margin-right:12px;
+ flex-shrink:0;
  background:#1a1a1a;
  border-radius:10px;
  overflow:hidden;
- text-decoration:none;
+ text-align:center;
  color:white;
+ text-decoration:none;
 }
 
 .staff img{
- width:140%;
- height:160px;
+ width:100%;
+ height:110px;
  object-fit:cover;
 }
 
 .staff p{
- padding:8px;
  font-size:12px;
- text-align:center;
+ padding:6px;
 }
 
-/* 無限スクロールの核 */
-@keyframes scrollStaff{
+/* ★無限スクロールの核 */
+@keyframes scrollLoop{
  0%{ transform:translateX(0); }
  100%{ transform:translateX(-50%); }
 }
-
+ 
 /* ホバーで止まる */
 .staff-wrap:hover .staff-track{
  animation-play-state: paused;
@@ -289,62 +277,28 @@ body{
  <h2>スタッフ紹介</h2>
 
  <div class="staff-wrap">
-  <div class="staff-track">
+  <div class="staff-track" id="staffTrack">
 
    <!-- 1セット -->
    <div class="staff-group">
-
-    <a href="yonekubo.html" class="staff">
-     <img src="yonekubo.jpg">
-     <p>米久保</p>
-    </a>
-
-    <a href="santosu.html" class="staff">
-     <img src="santosu.jpg">
-     <p>サントス</p>
-    </a>
-
-    <a href="satou.html" class="staff">
-     <img src="satou.jpg">
-     <p>佐藤</p>
-    </a>
-
-    <a href="aihi.html" class="staff">
-     <img src="aihi.jpg">
-     <p>あいひ</p>
-    </a>
-
+    <a href="#" class="staff"><img src="yonekubo.jpg"><p>米久保</p></a>
+    <a href="#" class="staff"><img src="santosu.jpg"><p>サントス</p></a>
+    <a href="#" class="staff"><img src="satou.jpg"><p>佐藤</p></a>
+    <a href="#" class="staff"><img src="aihi.jpg"><p>あいひ</p></a>
    </div>
 
-   <!-- 2セット（完全コピー） -->
+   <!-- 2セット（コピー） -->
    <div class="staff-group">
-
-    <a href="yonekubo.html" class="staff">
-     <img src="yonekubo.jpg">
-     <p>米久保</p>
-    </a>
-
-    <a href="santosu.html" class="staff">
-     <img src="santosu.jpg">
-     <p>サントス</p>
-    </a>
-
-    <a href="satou.html" class="staff">
-     <img src="satou.jpg">
-     <p>佐藤</p>
-    </a>
-
-    <a href="aihi.html" class="staff">
-     <img src="aihi.jpg">
-     <p>あいひ</p>
-    </a>
-
+    <a href="#" class="staff"><img src="yonekubo.jpg"><p>米久保</p></a>
+    <a href="#" class="staff"><img src="santosu.jpg"><p>サントス</p></a>
+    <a href="#" class="staff"><img src="satou.jpg"><p>佐藤</p></a>
+    <a href="#" class="staff"><img src="aihi.jpg"><p>あいひ</p></a>
    </div>
 
   </div>
  </div>
 </div>
-
+ 
 <!-- 料金 -->
 <div class="section">
  <h2>料金</h2>
@@ -412,8 +366,8 @@ window.addEventListener('scroll', () => {
   logo.classList.remove('small');
  }
 });
- // ===== 手動スクロールで自動停止 =====
-const track = document.querySelector('.staff-track');
+<script>
+const track = document.getElementById('staffTrack');
 const wrap = document.querySelector('.staff-wrap');
 
 // スマホ
@@ -426,11 +380,11 @@ wrap.addEventListener('touchend', () => {
 });
 
 // PC
-wrap.addEventListener('mousedown', () => {
+wrap.addEventListener('mouseenter', () => {
  track.style.animationPlayState = 'paused';
 });
 
-wrap.addEventListener('mouseup', () => {
+wrap.addEventListener('mouseleave', () => {
  track.style.animationPlayState = 'running';
 });
 </script>
