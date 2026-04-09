@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>なんでも屋サービス</title>
+
+<style>
+body{
+ margin:0;
+ font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+ background:#0f0f0f;
+ color:white;
+ line-height:1.6;
+}
+
+.header{
+ background:#000;
+ padding:15px;
+ text-align:center;
+ font-weight:bold;
+ position:sticky;
+ top:0;
+}
+
+.hero{
+ padding:80px 20px;
+ text-align:center;
+ background:linear-gradient(#000,#1a1a1a);
+}
+
+.logo{
+ width:110px;
+ margin-bottom:20px;
+}
+
+.highlight{
+ color:#FFD700;
+ font-weight:bold;
+}
+
+/* ボタン */
+.line-btn{
+ background:#06C755;
+ color:white;
+ padding:16px 28px;
+ border-radius:30px;
+ text-decoration:none;
+ display:inline-block;
+ margin-top:15px;
+ font-weight:bold;
+}
+
+.call-btn{
+ background:#ff4444;
+ color:white;
+ padding:16px 28px;
+ border-radius:30px;
+ text-decoration:none;
+ display:inline-block;
+ margin-top:10px;
+ font-weight:bold;
+}
+
+.section{
+ padding:50px 20px;
+ text-align:center;
+}
+
+.card{
+ background:#1a1a1a;
+ padding:20px;
+ border-radius:12px;
+ margin:10px auto;
+ max-width:400px;
+}
+
+.services{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+}
+
+.service{
+ width:45%;
+ max-width:160px;
+}
+
+.staff-wrap{
+ display:flex;
+ overflow-x:auto;
+ gap:15px;
+ padding:10px;
+}
+
+.staff{
+ min-width:150px;
+ background:#1a1a1a;
+ border-radius:10px;
+ overflow:hidden;
+}
+
+.staff img{
+ width:100%;
+}
+
+.staff p{
+ padding:10px;
+ font-size:13px;
+}
+
+/* 固定ボタン */
+.fixed-line{
+ position:fixed;
+ bottom:20px;
+ right:20px;
+ background:#06C755;
+ color:white;
+ padding:18px;
+ border-radius:50%;
+ text-decoration:none;
+}
+
+.fixed-call{
+ position:fixed;
+ bottom:20px;
+ right:90px;
+ background:#ff4444;
+ color:white;
+ padding:18px;
+ border-radius:50%;
+ text-decoration:none;
+}
+
+/* スタッフクリック */
+.staff{
+ cursor:pointer;
+ transition:0.3s;
+}
+
+.staff:hover{
+ transform:translateY(-5px);
+}
+
+/* 詳細 */
+.staff-detail{
+ max-height:0;
+ overflow:hidden;
+ transition:0.4s ease;
+ font-size:13px;
+ padding:0 10px;
+ text-align:left;
+}
+
+.staff.active .staff-detail{
+ max-height:300px;
+ padding:10px;
+}
+
+/* 名前 */
+.staff-name{
+ padding:10px;
+}
+
+/* 矢印 */
+.arrow{
+ display:inline-block;
+ transition:0.3s;
+}
+
+.staff.active .arrow{
+ transform:rotate(180deg);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+ なんでも屋サービス
+</div>
+
+<!-- ファーストビュー -->
+<div class="hero">
+ <img src="logo.png" class="logo">
+
+ <h1>歌舞伎町で最速対応の<br>なんでも屋</h1>
+ <p class="highlight">最短30分で駆けつけ</p>
+ <p class="highlight">今だけ初回1000円割引</p>
+
+ <p>📞 090-6028-2127（24時間対応）</p>
+
+ <a href="https://lin.ee/ZM4DhnD?text=依頼したいです" class="line-btn">
+ 🔥 LINEで相談
+ </a>
+
+ <br>
+
+ <a href="tel:09060282127" class="call-btn">
+ 📞 今すぐ電話する
+ </a>
+</div>
+
+<!-- 実績 -->
+<div class="section">
+ <h2>実績</h2>
+ <div class="card">
+ ✔ 対応件数：137件突破<br>
+ ✔ 最短対応：30分<br>
+ ✔ リピート率：92%<br>
+ ✔ 口コミ評価：★4.8
+ </div>
+</div>
+
+<!-- 不安解消 -->
+<div class="section">
+ <h2>よくある不安</h2>
+ <div class="card">追加料金なし（事前見積もり）</div>
+ <div class="card">清潔・丁寧な対応</div>
+ <div class="card">即日OK（最短30分）</div>
+</div>
+
+<!-- サービス -->
+<div class="section">
+ <h2>サービス内容</h2>
+ <div class="services">
+  <div class="card service">引っ越し</div>
+  <div class="card service">掃除</div>
+  <div class="card service">買い物代行</div>
+  <div class="card service">力仕事</div>
+ </div>
+</div>
+
+<!-- スタッフ -->
+<div class="section">
+ <h2>スタッフ紹介</h2>
+
+ <div class="staff-wrap">
+
+  <!-- 米久保 -->
+  <div class="staff" onclick="toggleStaff(this)">
+   <img src="yonekubo.jpg">
+
+   <p class="staff-name">
+    <strong>米久保</strong><br>
+    タップで詳細 <span class="arrow">▼</span>
+   </p>
+
+   <div class="staff-detail">
+    年齢：25歳<br>
+    担当：引っ越し・力仕事<br>
+    実績：50件以上<br>
+    強み：迅速対応・丁寧作業<br>
+    性格：明るく丁寧<br><br>
+    「どんな依頼でも全力で対応します！」
+   </div>
+  </div>
+
+  <!-- 山本 -->
+  <div class="staff" onclick="toggleStaff(this)">
+   <img src="tanaka.jpg">
+
+   <p class="staff-name">
+    <strong>山本</strong><br>
+    タップで詳細 <span class="arrow">▼</span>
+   </p>
+
+   <div class="staff-detail">
+    担当：力仕事<br>
+    強み：体力に自信あり<br>
+    性格：真面目
+   </div>
+  </div>
+
+  <!-- 佐藤 -->
+  <div class="staff" onclick="toggleStaff(this)">
+   <img src="satou.jpg">
+
+   <p class="staff-name">
+    <strong>佐藤</strong><br>
+    タップで詳細 <span class="arrow">▼</span>
+   </p>
+
+   <div class="staff-detail">
+    担当：掃除・丁寧作業<br>
+    強み：細かい作業が得意<br>
+    性格：優しい
+   </div>
+  </div>
+
+ </div>
+</div>
+
+<!-- 料金 -->
+<div class="section">
+ <h2>料金</h2>
+ <div class="card">1時間 3000円〜</div>
+ <div class="card">新宿区外出張費 1000円〜</div>
+</div>
+
+<!-- CTA -->
+<div class="section">
+ <h2>今すぐご相談ください</h2>
+
+ <a href="https://lin.ee/ZM4DhnD?text=依頼したいです" class="line-btn">
+ 🔥 LINEで相談
+ </a>
+
+ <br>
+
+ <a href="tel:09060282127" class="call-btn">
+ 📞 電話で相談
+ </a>
+</div>
+
+<!-- 固定ボタン -->
+<a href="https://lin.ee/ZM4DhnD?text=依頼したいです" class="fixed-line">LINE</a>
+<a href="tel:09012345678" class="fixed-call">📞</a>
+
+<script>
+function toggleStaff(el){
+document.querySelectorAll('.staff').forEach(item=>{
+  if(item !== el){
+   item.classList.remove('active');
+  }
+ });
+ el.classList.toggle('active');
+}
+</script>
+</body>
+</html>
