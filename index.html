@@ -416,6 +416,59 @@ wrap.addEventListener('mouseenter', () => {
 
 wrap.addEventListener('mouseleave', () => {
  track.style.animationPlayState = 'running';
+
+});
+
+const wrap = document.querySelector('.staff-wrap');
+const track = document.querySelector('.staff-track');
+
+let isDown = false;
+let startX;
+let scrollLeft;
+
+// ===== スワイプ開始 =====
+wrap.addEventListener('mousedown', (e) => {
+ isDown = true;
+ startX = e.pageX - wrap.offsetLeft;
+ scrollLeft = wrap.scrollLeft;
+
+ track.style.animationPlayState = 'paused'; // 止める
+});
+
+wrap.addEventListener('mouseleave', () => {
+ isDown = false;
+ track.style.animationPlayState = 'running'; // 再開
+});
+
+wrap.addEventListener('mouseup', () => {
+ isDown = false;
+ track.style.animationPlayState = 'running';
+});
+
+wrap.addEventListener('mousemove', (e) => {
+ if(!isDown) return;
+ e.preventDefault();
+
+ const x = e.pageX - wrap.offsetLeft;
+ const walk = (x - startX) * 2; // ←スピード調整
+ wrap.scrollLeft = scrollLeft - walk;
+});
+
+// ===== スマホ対応 =====
+wrap.addEventListener('touchstart', (e) => {
+ startX = e.touches[0].pageX;
+ scrollLeft = wrap.scrollLeft;
+ track.style.animationPlayState = 'paused';
+});
+
+wrap.addEventListener('touchmove', (e) => {
+ const x = e.touches[0].pageX;
+ const walk = (x - startX) * 2;
+ wrap.scrollLeft = scrollLeft - walk;
+});
+
+wrap.addEventListener('touchend', () => {
+ track.style.animationPlayState = 'running';
 });
 </script>
 </body>
