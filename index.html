@@ -136,6 +136,36 @@ body{
  font-size:13px;
 }
 
+ .staff-wrap{
+ overflow:hidden;
+}
+
+.staff-track{
+ display:flex;
+ width:max-content;
+ animation: scrollStaff 20s linear infinite;
+}
+
+.staff{
+ min-width:150px;
+ margin-right:15px;
+}
+
+/* 無限スクロール */
+@keyframes scrollStaff{
+ 0%{
+  transform:translateX(0);
+ }
+ 100%{
+  transform:translateX(-50%);
+ }
+}
+
+/* ホバーで止まる */
+.staff-wrap:hover .staff-track{
+ animation-play-state: paused;
+}
+ 
 /* 固定ボタン */
 .fixed-line{
  position:fixed;
@@ -277,6 +307,43 @@ body{
  <h2>スタッフ紹介</h2>
 
  <div class="staff-wrap">
+  <div class="staff-track">
+
+  <!-- 1セット目 -->
+  <div class="staff" onclick="toggleStaff(this)">
+   <img src="yonekubo.jpg">
+   <p class="staff-name"><strong>米久保</strong></p>
+  </div>
+
+  <div class="staff" onclick="toggleStaff(this)">
+   <img src="tanaka.jpg">
+   <p class="staff-name"><strong>山本</strong></p>
+  </div>
+
+  <div class="staff" onclick="toggleStaff(this)">
+   <img src="satou.jpg">
+   <p class="staff-name"><strong>佐藤</strong></p>
+  </div>
+
+  <!-- 2セット目（コピー） -->
+  <div class="staff" onclick="toggleStaff(this)">
+   <img src="yonekubo.jpg">
+   <p class="staff-name"><strong>米久保</strong></p>
+  </div>
+
+  <div class="staff" onclick="toggleStaff(this)">
+   <img src="tanaka.jpg">
+   <p class="staff-name"><strong>山本</strong></p>
+  </div>
+
+  <div class="staff" onclick="toggleStaff(this)">
+   <img src="satou.jpg">
+   <p class="staff-name"><strong>佐藤</strong></p>
+  </div>
+
+ </div>
+
+</div>
 
   <!-- 米久保 -->
   <div class="staff" onclick="toggleStaff(this)">
