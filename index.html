@@ -122,10 +122,9 @@ body{
  
 .staff-track{
  display:flex;
- width:calc(120px * 8); /* ←人数×2セット分 */
- animation: scrollLoop 20s linear infinite;
+ width:max-content;
 }
-
+ 
 .staff-group{
  display:flex;
 }
@@ -385,53 +384,67 @@ window.addEventListener('scroll', () => {
 });
  
 const wrap = document.querySelector('.staff-wrap');
-const track = document.querySelector('.staff-track');
 
+let speed = 0.5; // 自動スクロール速度
 let isDown = false;
 let startX;
 let scrollLeft;
 
+// ===== 無限ループ =====
+function autoScroll(){
+ if(!isDown){
+  wrap.scrollLeft += speed;
+
+  // ★ループ処理
+  if(wrap.scrollLeft >= wrap.scrollWidth / 2){
+   wrap.scrollLeft = 0;
+  }
+ }
+ requestAnimationFrame(autoScroll);
+}
+autoScroll();
+
 // ===== PCドラッグ =====
 wrap.addEventListener('mousedown', (e) => {
  isDown = true;
- startX = e.pageX - wrap.offsetLeft;
+ startX = e.pageX;
  scrollLeft = wrap.scrollLeft;
- track.style.animationPlayState = 'paused';
-});
-
-wrap.addEventListener('mouseleave', () => {
- isDown = false;
- track.style.animationPlayState = 'running';
 });
 
 wrap.addEventListener('mouseup', () => {
  isDown = false;
- track.style.animationPlayState = 'running';
+});
+
+wrap.addEventListener('mouseleave', () => {
+ isDown = false;
 });
 
 wrap.addEventListener('mousemove', (e) => {
  if(!isDown) return;
  e.preventDefault();
- const x = e.pageX - wrap.offsetLeft;
+
+ const x = e.pageX;
  const walk = (x - startX) * 2;
  wrap.scrollLeft = scrollLeft - walk;
 });
 
 // ===== スマホ =====
 wrap.addEventListener('touchstart', (e) => {
+ isDown = true;
  startX = e.touches[0].pageX;
  scrollLeft = wrap.scrollLeft;
- track.style.animationPlayState = 'paused';
 });
 
 wrap.addEventListener('touchmove', (e) => {
+ if(!isDown) return;
+
  const x = e.touches[0].pageX;
  const walk = (x - startX) * 2;
  wrap.scrollLeft = scrollLeft - walk;
 });
 
 wrap.addEventListener('touchend', () => {
- track.style.animationPlayState = 'running';
+ isDown = false;
 });
  
 </script>
