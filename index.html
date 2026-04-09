@@ -190,36 +190,6 @@ body{
  transform:translateY(-5px);
 }
 
-/* 詳細 */
-.staff-detail{
- max-height:0;
- overflow:hidden;
- transition:0.4s ease;
- font-size:13px;
- padding:0 10px;
- text-align:left;
-}
-
-.staff.active .staff-detail{
- max-height:300px;
- padding:10px;
-}
-
-/* 名前 */
-.staff-name{
- padding:10px;
-}
-
-/* 矢印 */
-.arrow{
- display:inline-block;
- transition:0.3s;
-}
-
-.staff.active .arrow{
- transform:rotate(180deg);
-}
-
  /* スクロールで出るボタン */
 .fixed-line,
 .fixed-call{
@@ -402,15 +372,6 @@ body{
 <a href="tel:09060282127" class="fixed-call">📞</a>
 
 <script>
-// ===== スタッフ開閉 =====
-function toggleStaff(el){
- document.querySelectorAll('.staff').forEach(item=>{
-  if(item !== el){
-   item.classList.remove('active');
-  }
- });
- el.classList.toggle('active');
-}
 
 // ===== スクロールでボタン表示 =====
 const lineBtn = document.querySelector('.fixed-line');
