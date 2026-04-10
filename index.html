@@ -257,14 +257,53 @@ body{
 </div>
 
 <!-- サービス -->
-<div class="section">
- <h2>サービス内容</h2>
- <div class="services">
-  <div class="card service">引っ越し</div>
-  <div class="card service">掃除</div>
-  <div class="card service">買い物代行</div>
-  <div class="card service">力仕事</div>
- </div>
+<div class="services">
+
+  <div class="card service open" onclick="toggleService(this)">
+    <div class="service-title">
+      引っ越し <span class="arrow">▼</span>
+    </div>
+    <div class="service-detail">
+      ・荷物運び<br>
+      ・家具の組み立て<br>
+      ・軽トラ対応可
+    </div>
+  </div>
+
+  <div class="card service" onclick="toggleService(this)">
+    <div class="service-title">
+      掃除 <span class="arrow">▼</span>
+    </div>
+    <div class="service-detail">
+      ・部屋清掃<br>
+      ・水回り清掃<br>
+      ・ゴミ回収サポート
+    </div>
+  </div>
+
+  <div class="card service" onclick="toggleService(this)">
+    <div class="service-title">
+      買い物代行 <span class="arrow">▼</span>
+    </div>
+    <div class="service-detail">
+      ・限定品購入<br>
+      ・飲食物の買い出し<br>
+      ・緊急対応OK
+    </div>
+  </div>
+
+  <div class="card service" onclick="toggleService(this)">
+    <div class="service-title">
+      力仕事 <span class="arrow">▼</span>
+    </div>
+    <div class="service-detail">
+      ・家具移動<br>
+      ・重い荷物運搬<br>
+      ・イベント設営
+    </div>
+  </div>
+
+</div>
 </div>
 
 <!-- スタッフ -->
