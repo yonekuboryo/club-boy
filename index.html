@@ -113,6 +113,35 @@ body{
  max-width:160px;
 }
 
+.service-title{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ font-weight:bold;
+}
+
+.service-detail{
+ max-height:0;
+ overflow:hidden;
+ transition:0.4s;
+ font-size:14px;
+ margin-top:10px;
+ opacity:0;
+}
+
+.service.open .service-detail{
+ max-height:200px;
+ opacity:1;
+}
+
+.arrow{
+ transition:0.3s;
+}
+
+.service.open .arrow{
+ transform:rotate(180deg);
+}
+ 
 .staff-wrap{
  overflow-x: auto;
  overflow-y: hidden;
@@ -437,6 +466,20 @@ document.querySelectorAll('.call-btn').forEach(btn=>{
   console.log("電話クリック数:", callClick);
  });
 });
+
+function toggleService(el){
+
+ const all = document.querySelectorAll('.service');
+
+ all.forEach(item=>{
+  if(item !== el){
+   item.classList.remove("open");
+  }
+ });
+
+ el.classList.toggle("open");
+}
+ 
 const logo = document.querySelector('.logo');
 const wrap = document.querySelector('.staff-wrap');
 
