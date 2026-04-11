@@ -643,20 +643,24 @@ body{
 <script>
 
 // =========================
-// オープニング制御
+// オープニング制御（改良版）
 // =========================
 const op = document.getElementById("opening");
 
-if(sessionStorage.getItem("visited")){
- if(op) op.remove();
-}else{
- sessionStorage.setItem("visited", "true");
+// 「戻る」かどうか判定
+const isBack = sessionStorage.getItem("back");
 
+// 戻ってきた時は表示しない
+if(isBack){
+ if(op) op.remove();
+ sessionStorage.removeItem("back"); // 一回だけ無効化
+}else{
+ // 通常は表示
  setTimeout(()=>{
   if(op) op.remove();
  }, 9000);
 }
-
+ 
 // 戻る時も消す
 window.addEventListener('pageshow', function (event) {
   const op = document.getElementById("opening");
