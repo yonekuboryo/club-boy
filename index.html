@@ -43,16 +43,22 @@ body{
 /* ===== キャッチ（最初に出る） ===== */
 .op-catch-big{
  position:absolute;
- font-size:32px;
- font-weight:bold;
+ font-size:32px;bold;
+ font-weight:
  text-align:center;
- color:#FFD700;
+ color:white; /* 基本は白 */
  line-height:1.4;
 
  opacity:0;
  animation:
   catchIn 1s ease forwards,
   catchOut 1s ease 2.5s forwards;
+}
+
+.op-catch-big .highlight{
+ color:#FFD700; /* 黄色 */
+ font-weight:bold;
+ font-size:1.2em;
 }
 
 /* ===== ロゴ＋人物（後から出る） ===== */
@@ -345,7 +351,7 @@ body{
   <!-- キャッチコピー -->
   <div class="op-catch-big">
     あなたの<br>
-    「ちょっと困った」<br>
+    <span class="highlight">「ちょっと困った」</span><br>
     を即解決
   </div>
 
