@@ -657,17 +657,17 @@ if(sessionStorage.getItem("visited")){
 
 const slider = document.getElementById("slider");
 
-let speed = 0.5;
-let isDown = false;
-let startX;
-let scrollLeft;
+let slideSpeed = 0.5;
+let slideIsDown = false;
+let slideStartX;
+let slideScrollLeft;
 
-// 無限ループ用に複製
+// 複製
 slider.innerHTML += slider.innerHTML;
 
 function autoSlide(){
- if(!isDown){
-  slider.scrollLeft += speed;
+ if(!slideIsDown){
+  slider.scrollLeft += slideSpeed;
 
   if(slider.scrollLeft >= slider.scrollWidth / 2){
    slider.scrollLeft = 0;
@@ -679,40 +679,39 @@ function autoSlide(){
 
 autoSlide();
 
-// ===== スワイプ =====
+// PC
 slider.addEventListener('mousedown', (e) => {
- isDown = true;
- startX = e.pageX;
- scrollLeft = slider.scrollLeft;
+ slideIsDown = true;
+ slideStartX = e.pageX;
+ slideScrollLeft = slider.scrollLeft;
 });
 
-slider.addEventListener('mouseup', () => isDown = false);
-slider.addEventListener('mouseleave', () => isDown = false);
+slider.addEventListener('mouseup', () => slideIsDown = false);
+slider.addEventListener('mouseleave', () => slideIsDown = false);
 
 slider.addEventListener('mousemove', (e) => {
- if(!isDown) return;
+ if(!slideIsDown) return;
  e.preventDefault();
  const x = e.pageX;
- const walk = (x - startX) * 2;
- slider.scrollLeft = scrollLeft - walk;
+ const walk = (x - slideStartX) * 2;
+ slider.scrollLeft = slideScrollLeft - walk;
 });
 
 // スマホ
 slider.addEventListener('touchstart', (e) => {
- isDown = true;
- startX = e.touches[0].pageX;
- scrollLeft = slider.scrollLeft;
+ slideIsDown = true;
+ slideStartX = e.touches[0].pageX;
+ slideScrollLeft = slider.scrollLeft;
 });
 
 slider.addEventListener('touchmove', (e) => {
- if(!isDown) return;
+ if(!slideIsDown) return;
  const x = e.touches[0].pageX;
- const walk = (x - startX) * 2;
- slider.scrollLeft = scrollLeft - walk;
+ const walk = (x - slideStartX) * 2;
+ slider.scrollLeft = slideScrollLeft - walk;
 });
 
-slider.addEventListener('touchend', () => isDown = false);
-
+slider.addEventListener('touchend', () => slideIsDown = false);
 // スクロール位置を保存
 window.addEventListener("scroll", () => {
  sessionStorage.setItem("scrollY", window.scrollY);
