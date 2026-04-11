@@ -51,6 +51,53 @@ body{
 .op-catch{
  animation: fadeUp 1.2s ease 1.2s forwards, glow 2s infinite alternate;
 }
+
+.op-logo,
+.op-img,
+.op-catch{
+ opacity:0;
+}
+
+/* ===== アニメーション定義 ===== */
+
+@keyframes fadeUp{
+ 0%{
+  opacity:0;
+  transform:translateY(30px);
+ }
+ 100%{
+  opacity:1;
+  transform:translateY(0);
+ }
+}
+
+@keyframes fadeOut{
+ 0%{
+  opacity:1;
+ }
+ 100%{
+  opacity:0;
+  visibility:hidden;
+ }
+}
+
+@keyframes zoom{
+ 0%{
+  transform:scale(1);
+ }
+ 100%{
+  transform:scale(1.05);
+ }
+}
+
+@keyframes glow{
+ 0%{
+  text-shadow:0 0 5px rgba(255,215,0,0.5);
+ }
+ 100%{
+  text-shadow:0 0 20px rgba(255,215,0,1);
+ }
+}
  
 .header{
  background:#000;
