@@ -351,14 +351,13 @@ body{
 }
 
  .slider-wrap{
- overflow:hidden;
- position:relative;
+ overflow-x:auto;   /* ←これに変更 */
+ overflow-y:hidden;
 }
-
-.slider{
+ .slider{
  display:flex;
  gap:12px;
- width:max-content;
+}
 
  overflow-x:auto; /* OK */
  scrollbar-width:none; /* 追加（Firefox） */
@@ -679,41 +678,28 @@ window.addEventListener('pageshow', function (event) {
 // =========================
 // 作業風景スライダー（ヌルヌル確定版）
 // =========================
-
 const slider = document.getElementById("slider");
 
-// 状態
 let slideSpeed = 0.5;
 let isDown = false;
 let startX = 0;
 let scrollLeft = 0;
 
-// 初期化（即実行）
-initSlider();
+// 初期化
+slider.innerHTML += slider.innerHTML;
 
-function initSlider(){
-
-  // 2倍にする
-  slider.innerHTML += slider.innerHTML;
-
-  // 最初は左からスタート
-  slider.scrollLeft = 0;
-
-  requestAnimationFrame(autoSlide);
-}
-
-// 自動スクロール
 function autoSlide(){
   if(!isDown){
     slider.scrollLeft += slideSpeed;
 
-    // 半分超えたら戻す（これが正解）
     if(slider.scrollLeft >= slider.scrollWidth / 2){
       slider.scrollLeft = 0;
     }
   }
   requestAnimationFrame(autoSlide);
 }
+
+autoSlide();
 
 // ===== PC =====
 slider.addEventListener('mousedown', (e) => {
