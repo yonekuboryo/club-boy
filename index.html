@@ -517,27 +517,27 @@ body{
    <!-- ★1セット -->
    <div class="staff-group">
 
-    <a href="yonekubo.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="yonekubo.jpg">
      <p>米久保</p>
     </a>
 
-    <a href="santosu.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="santosu.jpg">
      <p>サントス</p>
     </a>
 
-    <a href="miwa.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="miwa.jpg">
      <p>三輪</p>
     </a>
 
-    <a href="maru.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="maru.jpg">
      <p>まる</p>
     </a>
 
-    <a href="hanamichi.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="hanamichi.jpg">
      <p>花道</p>
     </a>
@@ -547,61 +547,62 @@ body{
    <!-- ★2セット（完全コピー） -->
    <div class="staff-group">
 
-    <a href="yonekubo.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="yonekubo.jpg">
      <p>米久保</p>
     </a>
 
-    <a href="santosu.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="santosu.jpg">
      <p>サントス</p>
     </a>
 
-    <a href="miwa.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="miwa.jpg">
      <p>三輪</p>
     </a>
 
-    <a href="maru.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="maru.jpg">
      <p>まる</p>
     </a>
 
-    <a href="hanamichi.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="hanamichi.jpg">
      <p>花道</p>
     </a>
-  
+
    </div>
+
     
        <!-- ★3セット（完全コピー） -->
    <div class="staff-group">
 
-    <a href="yonekubo.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="yonekubo.jpg">
      <p>米久保</p>
     </a>
 
-    <a href="santosu.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="santosu.jpg">
      <p>サントス</p>
     </a>
 
-    <a href="miwa.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="miwa.jpg">
      <p>三輪</p>
     </a>
 
-    <a href="hanamichi.html" class="staff">
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
+     <img src="maru.jpg">
+     <p>まる</p>
+    </a>
+
+    <a href="yonekubo.html" class="staff" onclick="saveScroll()">
      <img src="hanamichi.jpg">
      <p>花道</p>
     </a>
 
-    <a href="maru.html" class="staff">
-     <img src="maru.jpg">
-     <p>まる</p>
-    </a>
-   
    </div>
   
   </div>
@@ -793,6 +794,9 @@ window.addEventListener('load', () => {
   autoScroll();
 });
 
+ function saveScroll(){
+ sessionStorage.setItem("scrollY", window.scrollY);
+}
 
 // ===== PCドラッグ =====
 wrap.addEventListener('mousedown', (e) => {
