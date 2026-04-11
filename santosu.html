@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>サントス| 指名ページ</title>
+<title>サントス | 指名ページ</title>
 
 <style>
 body{
@@ -27,9 +27,19 @@ img{
  border-radius:10px;
  max-width:400px;
  margin:auto;
+ text-align:left;
+ line-height:1.8;
+}
 
- text-align:left;        /* ← 左揃え */
- line-height:1.8;       /* ← 行間UP */
+.card p{
+ margin-bottom:18px;
+}
+
+.label{
+ display:inline-block;
+ font-weight:bold;
+ color:#FFD700;
+ margin-bottom:5px;
 }
 
 .btn{
@@ -43,6 +53,14 @@ img{
 
 .line{ background:#06C755; color:white;}
 .call{ background:#ff4444; color:white;}
+
+.back-btn{
+ display:inline-block;
+ margin-top:20px;
+ color:#aaa;
+ text-decoration:none;
+ font-size:14px;
+}
 </style>
 </head>
 
@@ -53,12 +71,29 @@ img{
 <img src="santosu.jpg">
 
 <div class="card">
- 年齢：22歳<br>
- 担当：話し相手・スポーツ・掃除<br>
- 実績：色々な資格取得してます！<br>
- 強み：迅速対応・フッ軽 <br>
- 性格：元気・責任感あり <br><br>
- 危険作業は不可です。
+
+ <p><span class="label">年齢</span><br>22歳</p>
+
+ <p><span class="label">担当</span><br>
+ 話し相手・スポーツ・掃除
+ </p>
+
+ <p><span class="label">実績</span><br>
+ 色々な資格取得
+ </p>
+
+ <p><span class="label">強み</span><br>
+ 迅速対応・フットワーク軽い
+ </p>
+
+ <p><span class="label">性格</span><br>
+ 元気・責任感あり
+ </p>
+
+ <p><span class="label">注意事項</span><br>
+ 危険作業は不可です
+ </p>
+
 </div>
 
 <a href="https://lin.ee/ZM4DhnD?text=サントスさんに依頼したいです" class="btn line">
@@ -70,7 +105,9 @@ img{
 </a>
 
 <br>
-<a href="index.html" style="color:#aaa;">← 戻る</a>
+<a href="index.html#staff" class="back-btn">
+ ← スタッフ一覧に戻る
+</a>
 
 </body>
 </html>
