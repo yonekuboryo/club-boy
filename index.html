@@ -349,6 +349,26 @@ body{
  display:block;
 }
 
+ .slider-wrap{
+ overflow:hidden;
+ position:relative;
+}
+
+.slider{
+ display:flex;
+ gap:12px;
+ width:max-content;
+}
+
+.slider img{
+ width:280px;
+ height:180px;
+ object-fit:cover;
+ border-radius:12px;
+ flex-shrink:0;
+ box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
 </style>
 </head>
 <body>
@@ -393,6 +413,22 @@ body{
  <a href="tel:09060282127" class="call-btn">
  📞 今すぐ電話する
  </a>
+</div>
+
+<div class="section">
+ <h2>作業風景</h2>
+
+ <div class="slider-wrap">
+  <div class="slider" id="slider">
+
+   <img src="work1.jpg">
+   <img src="work2.jpg">
+   <img src="work3.jpg">
+   <img src="work4.jpg">
+   <img src="work5.jpg">
+
+  </div>
+ </div>
 </div>
 
 <!-- 実績 -->
@@ -613,6 +649,64 @@ if(sessionStorage.getItem("visited")){
     if(op) op.remove();
   }, 9000);
 }
+
+const slider = document.getElementById("slider");
+
+let speed = 0.5;
+let isDown = false;
+let startX;
+let scrollLeft;
+
+// 無限用に複製
+slider.innerHTML += slider.innerHTML;
+
+function autoSlide(){
+ if(!isDown){
+  slider.scrollLeft += speed;
+
+  if(slider.scrollLeft >= slider.scrollWidth / 2){
+   slider.scrollLeft = 0;
+  }
+ }
+
+ requestAnimationFrame(autoSlide);
+}
+
+autoSlide();
+
+// ===== スワイプ対応 =====
+slider.addEventListener('mousedown', (e) => {
+ isDown = true;
+ startX = e.pageX;
+ scrollLeft = slider.scrollLeft;
+});
+
+slider.addEventListener('mouseup', () => isDown = false);
+slider.addEventListener('mouseleave', () => isDown = false);
+
+slider.addEventListener('mousemove', (e) => {
+ if(!isDown) return;
+ e.preventDefault();
+ const x = e.pageX;
+ const walk = (x - startX) * 2;
+ slider.scrollLeft = scrollLeft - walk;
+});
+
+// スマホ
+slider.addEventListener('touchstart', (e) => {
+ isDown = true;
+ startX = e.touches[0].pageX;
+ scrollLeft = slider.scrollLeft;
+});
+
+slider.addEventListener('touchmove', (e) => {
+ if(!isDown) return;
+ const x = e.touches[0].pageX;
+ const walk = (x - startX) * 2;
+ slider.scrollLeft = scrollLeft - walk;
+});
+
+slider.addEventListener('touchend', () => isDown = false);
   
 // ===== クリック数カウント =====
 let lineClick = 0;
