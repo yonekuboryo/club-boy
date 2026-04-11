@@ -645,17 +645,13 @@ body{
 const op = document.getElementById("opening");
 
 if(sessionStorage.getItem("visited")){
-  // 2回目以降は即削除
-  if(op) op.remove();
+ if(op) op.remove();
 }else{
-  // 初回フラグ
-  sessionStorage.setItem("visited", "true");
+ sessionStorage.setItem("visited", "true");
 
-  // 通常通りフェードアウト
-  setTimeout(()=>{
-    if(op) op.remove();
-  }, 9000);
-}
+ setTimeout(()=>{
+  if(op) op.remove();
+ }, 9000);
 
 const slider = document.getElementById("slider");
 
@@ -714,6 +710,19 @@ slider.addEventListener('touchmove', (e) => {
 });
 
 slider.addEventListener('touchend', () => isDown = false);
+
+// スクロール位置を保存
+window.addEventListener("scroll", () => {
+ sessionStorage.setItem("scrollY", window.scrollY);
+});
+
+// ページ読み込み時に復元
+window.addEventListener("load", () => {
+ const y = sessionStorage.getItem("scrollY");
+ if(y){
+  window.scrollTo(0, parseInt(y));
+ }
+});
  
 // ===== クリック数カウント =====
 let lineClick = 0;
