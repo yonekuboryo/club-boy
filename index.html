@@ -15,6 +15,14 @@ body{
 forwards;
 }
 
+body{
+ margin:0;
+ font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+ background:#0f0f0f;
+ color:white;
+ line-height:1.6;
+}
+
 /* ===== オープニング ===== */
 .opening{
  position:fixed;
@@ -28,31 +36,31 @@ forwards;
  justify-content:center;
  align-items:center;
  z-index:9999;
- animation: fadeOut 1s ease 2s forwards;
+
+ /* ←ここだけでフェード管理 */
+ animation: fadeOut 3.5s cubic-bezier(0.22, 1, 0.36, 1) 6s forwards;
 }
- 
+
 /* ロゴ */
 .op-logo{
  width:280px;
  opacity:0;
  transform:translateY(30px);
+
  animation: fadeUp 1.8s ease forwards;
- animation: fadeOut 3.5s cubic-bezier(0.22, 1, 0.36, 1) 6s forwards;
 }
 
-/* 人物（←ここ重要） */
+/* 人物 */
 .op-img{
  width:280px;
  border-radius:10px;
  margin-top:20px;
+ filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8));
 
  opacity:0;
  transform:translateY(30px);
-  /* 影つけて浮かせる */
- filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8));
 
  animation: fadeUp 1.8s ease 0.8s forwards, zoom 6s ease forwards;
- animation: fadeOut 3.5s cubic-bezier(0.22, 1, 0.36, 1) 6s forwards;
 }
 
 /* キャッチ */
@@ -66,38 +74,6 @@ forwards;
  transform:translateY(30px);
 
  animation: fadeUp 1.2s ease 0.8s forwards, glow 2s infinite alternate;
- animation: fadeOut 3.5s cubic-bezier(0.22, 1, 0.36, 1) 6s forwards;
-}
-
-.op-catch span{
- font-size:22px;
- font-weight:bold;
- color:#fff;
-}
-
-/* アニメーション */
-@keyframes fadeUp{
- to{
-  opacity:1;
-  transform:translateY(0);
- }
-}
-
-@keyframes glow{
- from{ text-shadow:0 0 5px #FFD700; }
- to{ text-shadow:0 0 20px #FFD700; }
-}
-
-@keyframes zoom{
- from{ transform:scale(0.95); }
- to{ transform:scale(1); }
-}
-
-@keyframes fadeOut{
- to{
-  opacity:0;
-  visibility:hidden;
- }
 }
  
 .header{
@@ -549,11 +525,9 @@ forwards;
 
 <script>
 
-// ===== フェード後に背景化 =====
 setTimeout(()=>{
  const op = document.getElementById("opening");
  if(op) op.remove();
-}, 9500);
 
  document.body.style.backgroundImage = "url('yonekubo.jpg')";
  document.body.style.backgroundSize = "cover";
@@ -562,7 +536,7 @@ setTimeout(()=>{
  document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
  document.body.style.backgroundBlendMode = "darken";
 
-}, 8500); // ←ここ伸ばす
+}, 9500);
   
 // ===== クリック数カウント =====
 let lineClick = 0;
