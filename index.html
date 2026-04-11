@@ -37,6 +37,7 @@ forwards;
  opacity:0;
  transform:translateY(30px);
  animation: fadeUp 1.8s ease forwards;
+ animation: fadeOut 3.5s cubic-bezier(0.22, 1, 0.36, 1) 6s forwards;
 }
 
 /* 人物（←ここ重要） */
@@ -51,6 +52,7 @@ forwards;
  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8));
 
  animation: fadeUp 1.8s ease 0.8s forwards, zoom 6s ease forwards;
+ animation: fadeOut 3.5s cubic-bezier(0.22, 1, 0.36, 1) 6s forwards;
 }
 
 /* キャッチ */
@@ -64,7 +66,7 @@ forwards;
  transform:translateY(30px);
 
  animation: fadeUp 1.2s ease 0.8s forwards, glow 2s infinite alternate;
- animation: fadeOut 1s ease 2.5s forwards;
+ animation: fadeOut 3.5s cubic-bezier(0.22, 1, 0.36, 1) 6s forwards;
 }
 
 .op-catch span{
@@ -551,7 +553,7 @@ forwards;
 setTimeout(()=>{
  const op = document.getElementById("opening");
  if(op) op.remove();
- }, 3500);
+}, 9500);
 
  document.body.style.backgroundImage = "url('yonekubo.jpg')";
  document.body.style.backgroundSize = "cover";
