@@ -647,15 +647,17 @@ body{
 // =========================
 const op = document.getElementById("opening");
 
-// 「戻る」かどうか判定
-const isBack = sessionStorage.getItem("back");
-
-// 戻ってきた時は表示しない
-if(isBack){
+// 戻ってきた場合は絶対表示しない
+if(sessionStorage.getItem("back")){
  if(op) op.remove();
- sessionStorage.removeItem("back"); // 一回だけ無効化
-}else{
- // 通常は表示
+ sessionStorage.removeItem("back"); // 1回だけ有効
+}
+else if(sessionStorage.getItem("visited")){
+ if(op) op.remove();
+}
+else{
+ sessionStorage.setItem("visited", "true");
+
  setTimeout(()=>{
   if(op) op.remove();
  }, 9000);
