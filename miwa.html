@@ -27,9 +27,19 @@ img{
  border-radius:10px;
  max-width:400px;
  margin:auto;
+ text-align:left;
+ line-height:1.8;
+}
 
- text-align:left;        /* ← 左揃え */
- line-height:1.8;       /* ← 行間UP */
+.card p{
+ margin-bottom:18px;
+}
+
+.label{
+ display:inline-block;
+ font-weight:bold;
+ color:#FFD700;
+ margin-bottom:5px;
 }
 
 .btn{
@@ -43,6 +53,14 @@ img{
 
 .line{ background:#06C755; color:white;}
 .call{ background:#ff4444; color:white;}
+
+.back-btn{
+ display:inline-block;
+ margin-top:20px;
+ color:#aaa;
+ text-decoration:none;
+ font-size:14px;
+}
 </style>
 </head>
 
@@ -53,14 +71,31 @@ img{
 <img src="miwa.jpg">
 
 <div class="card">
- 年齢：24歳<br>
- 担当：掃除・軽貨物運搬・料理<br>
- 実績：調理師免許資格取得 <br>
- 強み：一つのことに対しての集中力と理解力 <br>
- 性格：責任感・真面目<br>
-危険作業・細かい作業・パソコン作業は不可。
-出来る限りご希望に添えるよう努力致します。
-<div>
+
+ <p><span class="label">年齢</span><br>24歳</p>
+
+ <p><span class="label">担当</span><br>
+ 掃除・軽貨物運搬・料理
+ </p>
+
+ <p><span class="label">実績</span><br>
+ 調理師免許資格取得
+ </p>
+
+ <p><span class="label">強み</span><br>
+ 集中力と理解力の高さ
+ </p>
+
+ <p><span class="label">性格</span><br>
+ 責任感・真面目
+ </p>
+
+ <p><span class="label">注意事項</span><br>
+ 危険作業・細かい作業・パソコン作業は不可。<br>
+ 出来る限りご希望に添えるよう努力致します。
+ </p>
+
+</div>
 
 <a href="https://lin.ee/ZM4DhnD?text=三輪さんに依頼したいです" class="btn line">
  👉 この人にLINEで依頼
@@ -71,7 +106,9 @@ img{
 </a>
 
 <br>
-<a href="index.html" style="color:#aaa;">← 戻る</a>
+<a href="index.html#staff" class="back-btn">
+ ← スタッフ一覧に戻る
+</a>
 
 </body>
 </html>
