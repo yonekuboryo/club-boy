@@ -642,7 +642,9 @@ body{
 
 <script>
 
-// 初回だけオープニング表示
+// =========================
+// オープニング制御
+// =========================
 const op = document.getElementById("opening");
 
 if(sessionStorage.getItem("visited")){
@@ -655,6 +657,19 @@ if(sessionStorage.getItem("visited")){
  }, 9000);
 }
 
+// 戻る時も消す
+window.addEventListener('pageshow', function (event) {
+  const op = document.getElementById("opening");
+
+  if (event.persisted || sessionStorage.getItem("visited")) {
+    if(op) op.remove();
+  }
+});
+
+
+// =========================
+// 作業風景スライダー
+// =========================
 const slider = document.getElementById("slider");
 
 let slideSpeed = 0.5;
@@ -673,10 +688,8 @@ function autoSlide(){
    slider.scrollLeft = 0;
   }
  }
-
  requestAnimationFrame(autoSlide);
 }
-
 autoSlide();
 
 // PC
@@ -712,12 +725,15 @@ slider.addEventListener('touchmove', (e) => {
 });
 
 slider.addEventListener('touchend', () => slideIsDown = false);
-// スクロール位置を保存
+
+
+// =========================
+// スクロール位置保存
+// =========================
 window.addEventListener("scroll", () => {
  sessionStorage.setItem("scrollY", window.scrollY);
 });
 
-// ページ読み込み時に復元
 window.addEventListener("load", () => {
  const y = sessionStorage.getItem("scrollY");
  if(y){
@@ -727,37 +743,15 @@ window.addEventListener("load", () => {
  }
 });
 
-// 戻る時は絶対オープニング消す
-window.addEventListener('pageshow', function (event) {
-  const op = document.getElementById("opening");
+function saveScroll(){
+ sessionStorage.setItem("scrollY", window.scrollY);
+}
 
-  if (event.persisted || sessionStorage.getItem("visited")) {
-    if(op) op.remove();
-  } else {
-    sessionStorage.setItem("visited", "true");
-  }
-});
- 
-// ===== クリック数カウント =====
-let lineClick = 0;
-let callClick = 0;
 
-document.querySelectorAll('.line-btn').forEach(btn=>{
- btn.addEventListener('click',()=>{
-  lineClick++;
-  console.log("LINEクリック数:", lineClick);
- });
-});
-
-document.querySelectorAll('.call-btn').forEach(btn=>{
- btn.addEventListener('click',()=>{
-  callClick++;
-  console.log("電話クリック数:", callClick);
- });
-});
-
+// =========================
+// サービス開閉
+// =========================
 function toggleService(el){
-
  const all = document.querySelectorAll('.service');
 
  all.forEach(item=>{
@@ -768,84 +762,81 @@ function toggleService(el){
 
  el.classList.toggle("open");
 }
- 
-const logo = document.querySelector('.logo');
+
+
+// =========================
+// スタッフ無限スクロール
+// =========================
 const wrap = document.querySelector('.staff-wrap');
 
+let staffSpeed = 0.5;
+let staffIsDown = false;
+let staffStartX;
+let staffScrollLeft;
+let oneSetWidth = 0;
+
 function initScroll(){
-  oneSetWidth = wrap.scrollWidth / 3;
-  wrap.scrollLeft = oneSetWidth;
+ oneSetWidth = wrap.scrollWidth / 3;
+ wrap.scrollLeft = oneSetWidth;
 }
 
 function autoScroll(){
-  if(!isDown){
-    wrap.scrollLeft += speed;
+ if(!staffIsDown){
+  wrap.scrollLeft += staffSpeed;
 
-    if(wrap.scrollLeft >= oneSetWidth * 2){
-      wrap.scrollLeft -= oneSetWidth;
-    }
-
-    if(wrap.scrollLeft <= 0){
-      wrap.scrollLeft += oneSetWidth;
-    }
+  if(wrap.scrollLeft >= oneSetWidth * 2){
+   wrap.scrollLeft -= oneSetWidth;
   }
 
-  requestAnimationFrame(autoScroll);
+  if(wrap.scrollLeft <= 0){
+   wrap.scrollLeft += oneSetWidth;
+  }
+ }
+
+ requestAnimationFrame(autoScroll);
 }
- 
+
 window.addEventListener('load', () => {
-  initScroll();
-  autoScroll();
+ initScroll();
+ autoScroll();
 });
 
- function saveScroll(){
- sessionStorage.setItem("scrollY", window.scrollY);
-}
-
-// ===== PCドラッグ =====
+// PC
 wrap.addEventListener('mousedown', (e) => {
-  isDown = true;
-  startX = e.pageX;
-  scrollLeft = wrap.scrollLeft;
+ staffIsDown = true;
+ staffStartX = e.pageX;
+ staffScrollLeft = wrap.scrollLeft;
 });
 
-wrap.addEventListener('mouseup', () => {
-  isDown = false;
-});
-
-wrap.addEventListener('mouseleave', () => {
-  isDown = false;
-});
+wrap.addEventListener('mouseup', () => staffIsDown = false);
+wrap.addEventListener('mouseleave', () => staffIsDown = false);
 
 wrap.addEventListener('mousemove', (e) => {
-  if(!isDown) return;
-  e.preventDefault();
+ if(!staffIsDown) return;
+ e.preventDefault();
 
-  const x = e.pageX;
-  const walk = (x - startX) * 2;
-  wrap.scrollLeft = scrollLeft - walk;
+ const x = e.pageX;
+ const walk = (x - staffStartX) * 2;
+ wrap.scrollLeft = staffScrollLeft - walk;
 });
 
-
-// ===== スマホ =====
+// スマホ
 wrap.addEventListener('touchstart', (e) => {
-  isDown = true;
-  startX = e.touches[0].pageX;
-  scrollLeft = wrap.scrollLeft;
+ staffIsDown = true;
+ staffStartX = e.touches[0].pageX;
+ staffScrollLeft = wrap.scrollLeft;
 });
 
 wrap.addEventListener('touchmove', (e) => {
-  if(!isDown) return;
-  
- e.preventDefault();
+ if(!staffIsDown) return;
 
-  const x = e.touches[0].pageX;
-  const walk = (x - startX) * 2;
-  wrap.scrollLeft = scrollLeft - walk;
+ const x = e.touches[0].pageX;
+ const walk = (x - staffStartX) * 2;
+ wrap.scrollLeft = staffScrollLeft - walk;
 });
 
 wrap.addEventListener('touchend', () => {
-  isDown = false;
+ staffIsDown = false;
 });
  
 </script>
