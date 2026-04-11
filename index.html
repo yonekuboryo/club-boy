@@ -358,8 +358,13 @@ body{
  display:flex;
  gap:12px;
  width:max-content;
- overflow-x:auto;
- scroll-behavior:smooth;
+
+ overflow-x:auto; /* OK */
+ scrollbar-width:none; /* 追加（Firefox） */
+}
+
+.slider::-webkit-scrollbar{
+ display:none; /* 追加（Chrome） */
 }
 
 .slider img{
@@ -652,22 +657,21 @@ if(sessionStorage.getItem("visited")){
   }, 9000);
 }
 
-const slider = document.querySelector(".slider-wrap");
+const slider = document.getElementById("slider");
 
 let speed = 0.5;
 let isDown = false;
 let startX;
 let scrollLeft;
 
-// 中身複製
-const inner = slider.querySelector(".slider");
-inner.innerHTML += inner.innerHTML;
+// 無限ループ用に複製
+slider.innerHTML += slider.innerHTML;
 
 function autoSlide(){
  if(!isDown){
   slider.scrollLeft += speed;
 
-  if(slider.scrollLeft >= inner.scrollWidth / 2){
+  if(slider.scrollLeft >= slider.scrollWidth / 2){
    slider.scrollLeft = 0;
   }
  }
@@ -677,7 +681,7 @@ function autoSlide(){
 
 autoSlide();
 
-// ===== スワイプ対応 =====
+// ===== スワイプ =====
 slider.addEventListener('mousedown', (e) => {
  isDown = true;
  startX = e.pageX;
@@ -710,7 +714,7 @@ slider.addEventListener('touchmove', (e) => {
 });
 
 slider.addEventListener('touchend', () => isDown = false);
-  
+ 
 // ===== クリック数カウント =====
 let lineClick = 0;
 let callClick = 0;
