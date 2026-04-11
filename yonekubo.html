@@ -108,6 +108,13 @@ img{
 </a>
 
 <br>
-<a href="index.html#staff" class="back-btn">
+<a href="index.html#staff" class="back-btn" onclick="goBack()">
  ← スタッフ一覧に戻る
 </a>
+
+<script>
+function goBack(){
+  // 戻る時はオープニング出さない
+  sessionStorage.setItem("back", "true");
+}
+</script>
