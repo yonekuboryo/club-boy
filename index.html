@@ -674,74 +674,79 @@ window.addEventListener('pageshow', function (event) {
 
 
 // =========================
-// 作業風景スライダー（完全修正版）
+// 作業風景スライダー（ヌルヌル確定版）
 // =========================
-window.addEventListener("load", () => {
 
- const slider = document.getElementById("slider");
+const slider = document.getElementById("slider");
 
- let slideSpeed = 0.7;
- let slideIsDown = false;
- let slideStartX = 0;
- let slideScrollLeft = 0;
+// 状態
+let slideSpeed = 0.8;
+let isDown = false;
+let startX = 0;
+let scrollLeft = 0;
 
- // 複製
- slider.innerHTML += slider.innerHTML;
+// 初期化（即実行）
+initSlider();
 
- // ★ここ重要（初期位置）
- slider.scrollLeft = slider.scrollWidth / 2;
+function initSlider(){
 
- function autoSlide(){
-  if(!slideIsDown){
-   slider.scrollLeft += slideSpeed;
+  // 2倍にする
+  slider.innerHTML += slider.innerHTML;
 
-   if(slider.scrollLeft >= slider.scrollWidth){
-    slider.scrollLeft = slider.scrollWidth / 2;
-   }
+  // 初期位置
+  slider.scrollLeft = slider.scrollWidth / 2;
+
+  // アニメーション開始
+  requestAnimationFrame(autoSlide);
+}
+
+// 自動スクロール
+function autoSlide(){
+  if(!isDown){
+    slider.scrollLeft += slideSpeed;
+
+    // 無限ループ
+    if(slider.scrollLeft >= slider.scrollWidth){
+      slider.scrollLeft = slider.scrollWidth / 2;
+    }
   }
   requestAnimationFrame(autoSlide);
- }
+}
 
- autoSlide();
+// ===== PC =====
+slider.addEventListener('mousedown', (e) => {
+  isDown = true;
+  startX = e.pageX;
+  scrollLeft = slider.scrollLeft;
+});
 
- // ===== PC =====
- slider.addEventListener('mousedown', (e) => {
-  slideIsDown = true;
-  slideStartX = e.pageX;
-  slideScrollLeft = slider.scrollLeft;
- });
+slider.addEventListener('mouseup', () => isDown = false);
+slider.addEventListener('mouseleave', () => isDown = false);
 
- slider.addEventListener('mouseup', () => slideIsDown = false);
- slider.addEventListener('mouseleave', () => slideIsDown = false);
-
- slider.addEventListener('mousemove', (e) => {
-  if(!slideIsDown) return;
+slider.addEventListener('mousemove', (e) => {
+  if(!isDown) return;
   e.preventDefault();
 
-  const x = e.pageX;
-  const walk = (x - slideStartX) * 2;
-  slider.scrollLeft = slideScrollLeft - walk;
- });
+  const walk = (e.pageX - startX) * 2;
+  slider.scrollLeft = scrollLeft - walk;
+});
 
- // ===== スマホ =====
- slider.addEventListener('touchstart', (e) => {
-  slideIsDown = true;
-  slideStartX = e.touches[0].pageX;
-  slideScrollLeft = slider.scrollLeft;
- });
+// ===== スマホ =====
+slider.addEventListener('touchstart', (e) => {
+  isDown = true;
+  startX = e.touches[0].pageX;
+  scrollLeft = slider.scrollLeft;
+});
 
- slider.addEventListener('touchmove', (e) => {
-  if(!slideIsDown) return;
+slider.addEventListener('touchmove', (e) => {
+  if(!isDown) return;
 
-  const x = e.touches[0].pageX;
-  const walk = (x - slideStartX) * 2;
-  slider.scrollLeft = slideScrollLeft - walk;
- });
+  const walk = (e.touches[0].pageX - startX) * 2;
+  slider.scrollLeft = scrollLeft - walk;
+});
 
- slider.addEventListener('touchend', () => {
-  slideIsDown = false;
- });
-
+slider.addEventListener('touchend', () => {
+  isDown = false;
 });
 
 // =========================
