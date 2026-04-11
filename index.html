@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>レンタルこれだけやる人</title>
 
+<!-- オープニング -->
+<div class="opening" id="opening">
+
+  <img src="logo.png" class="op-logo">
+
+  <img src="yonekubo.jpg" class="op-img">
+
+  <p class="op-catch">
+    あなたの<br>
+    <span>「ちょっと困った」</span><br>
+    を即解決
+  </p>
+
+</div>
+ 
 <style>
 body{
  margin:0;
@@ -14,6 +29,84 @@ body{
  line-height:1.6;
 }
 
+/* ===== オープニング ===== */
+.opening{
+ position:fixed;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ background:#000;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ z-index:9999;
+
+ /* 5秒後にフェードアウト */
+ animation: fadeOut 2s ease 3s forwards;
+}
+
+/* ロゴ */
+.op-logo{
+ width:220px;
+ opacity:0;
+ transform:translateY(20px);
+ animation: fadeUp 1s ease forwards;
+}
+
+/* 人物 */
+.op-img{
+ width:220px;
+ border-radius:10px;
+ margin-top:20px;
+ opacity:0;
+ transform:translateY(20px);
+ animation: fadeUp 1s ease 0.5s forwards;
+}
+
+/* キャッチコピー */
+.op-catch{
+ color:#FFD700;
+ font-size:18px;
+ text-align:center;
+ margin-top:20px;
+
+ opacity:0;
+ transform:translateY(20px);
+
+ /* 一番最後に出す */
+ animation: fadeUp 1s ease 1.2s forwards, glow 2s infinite alternate;
+}
+
+.op-catch span{
+ font-size:22px;
+ font-weight:bold;
+ color:#fff;
+}
+
+/* 共通アニメーション */
+@keyframes fadeUp{
+ to{
+  opacity:1;
+  transform:translateY(0);
+ }
+}
+
+/* 光る */
+@keyframes glow{
+ from{ text-shadow:0 0 5px #FFD700; }
+ to{ text-shadow:0 0 20px #FFD700; }
+}
+
+/* 全体フェードアウト */
+@keyframes fadeOut{
+ to{
+  opacity:0;
+  visibility:hidden;
+ }
+}
+ 
 .header{
  background:#000;
  padding:15px;
@@ -448,6 +541,24 @@ body{
 <a href="tel:09060282127" class="fixed-call">📞</a>
 
 <script>
+
+// ===== フェード後に背景化 =====
+setTimeout(()=>{
+
+ // オープニング削除
+ document.getElementById("opening").style.display = "none";
+
+ // 背景として人物をうっすら表示
+ document.body.style.backgroundImage = "url('yonekubo.jpg')";
+ document.body.style.backgroundSize = "cover";
+ document.body.style.backgroundPosition = "center";
+ document.body.style.backgroundAttachment = "fixed";
+
+ // 暗くして見やすく
+ document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
+ document.body.style.backgroundBlendMode = "darken";
+
+}, 5000);
 
 // ===== クリック数カウント =====
 let lineClick = 0;
