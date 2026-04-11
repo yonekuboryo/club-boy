@@ -23,88 +23,94 @@ body{
 }
 
 /* ===== オープニング ===== */
+/* ===== オープニング全体 ===== */
 .opening{
  position:fixed;
  top:0;
  left:0;
  width:100%;
  height:100%;
- background:rgba(0,0,0,0.95);
+ background:#000;
  display:flex;
- flex-direction:column;
  justify-content:center;
  align-items:center;
+ flex-direction:column;
  z-index:9999;
 
- /* ←ここだけでフェード管理 */
- animation: fadeOut 3.5s cubic-bezier(0.22, 1, 0.36, 1) 4s forwards;
+ animation: fadeOut 2s ease 6s forwards;
+}
+
+/* ===== キャッチ（最初に出る） ===== */
+.op-catch-big{
+ position:absolute;
+ font-size:32px;
+ font-weight:bold;
+ text-align:center;
+ color:#FFD700;
+ line-height:1.4;
+
+ opacity:0;
+ animation:
+  catchIn 1s ease forwards,
+  catchOut 1s ease 2.5s forwards;
+}
+
+/* ===== ロゴ＋人物（後から出る） ===== */
+.op-main{
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ opacity:0;
+
+ animation: mainIn 1s ease 3.5s forwards;
 }
 
 .op-logo{
- width:240px;
- opacity:0;
- animation: fadeUp 1.5s ease forwards;
+ width:200px;
+ margin-bottom:10px;
 }
 
 .op-img{
- width:240px; /* ←ここ重要 */
- border-radius:12px;
- margin-top:20px;
+ width:180px;
+ height:180px;
  object-fit:cover;
-
- opacity:0;
-
- animation: fadeUp 1.5s ease 0.8s forwards;
+ border-radius:50%;
 }
 
-.op-catch{
- animation: fadeUp 1.2s ease 1.2s forwards, glow 2s infinite alternate;
+/* ===== アニメーション ===== */
+
+@keyframes catchIn{
+ from{
+  opacity:0;
+  transform:scale(1.2);
+ }
+ to{
+  opacity:1;
+  transform:scale(1);
+ }
 }
 
-.op-logo,
-.op-img,
-.op-catch{
- opacity:0;
+@keyframes catchOut{
+ to{
+  opacity:0;
+ }
 }
 
-/* ===== アニメーション定義 ===== */
-
-@keyframes fadeUp{
- 0%{
+@keyframes mainIn{
+ from{
   opacity:0;
   transform:translateY(30px);
  }
- 100%{
+ to{
   opacity:1;
   transform:translateY(0);
  }
 }
 
 @keyframes fadeOut{
- 0%{
-  opacity:1;
- }
- 100%{
+ to{
   opacity:0;
   visibility:hidden;
- }
-}
-
-@keyframes zoom{
- 0%{
-  transform:scale(1);
- }
- 100%{
-  transform:scale(1.05);
- }
-}
-
-@keyframes glow{
- 0%{
-  text-shadow:0 0 5px rgba(255,215,0,0.5);
- }
- 100%{
-  text-shadow:0 0 20px rgba(255,215,0,1);
  }
 }
  
@@ -334,21 +340,23 @@ body{
 </head>
 <body>
 
-<!-- オープニング -->
 <div class="opening" id="opening">
 
-  <img src="logo.png" class="op-logo">
-
-  <img src="yonekubo2.png" class="op-img">
-
-  <p class="op-catch">
+  <!-- キャッチコピー -->
+  <div class="op-catch-big">
     あなたの<br>
-    <span>「ちょっと困った」</span><br>
+    「ちょっと困った」<br>
     を即解決
-  </p>
+  </div>
+
+  <!-- ロゴ＆人物 -->
+  <div class="op-main">
+    <img src="logo.png" class="op-logo">
+    <img src="yonekubo2.png" class="op-img">
+  </div>
 
 </div>
-
+ 
 <div class="header">
  レンタルこれだけやる人
 </div>
@@ -560,17 +568,7 @@ body{
 setTimeout(()=>{
  const op = document.getElementById("opening");
  if(op) op.remove();
-
- document.body.style.backgroundImage = "url('yonekubo.jpg')";
- document.body.style.backgroundSize = "cover";
- document.body.style.backgroundPosition = "center";
- document.body.style.backgroundAttachment = "fixed";
-
- /* ←ここ追加 */
- document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
- document.body.style.backgroundBlendMode = "darken";
-
-}, 9500);
+}, 7000);
   
 // ===== クリック数カウント =====
 let lineClick = 0;
