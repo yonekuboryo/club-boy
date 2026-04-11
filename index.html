@@ -728,11 +728,14 @@ window.addEventListener("load", () => {
  }
 });
 
-// 戻る時はオープニング出さない
+// 戻る時は絶対オープニング消す
 window.addEventListener('pageshow', function (event) {
-  if (event.persisted) {
-    const op = document.getElementById("opening");
+  const op = document.getElementById("opening");
+
+  if (event.persisted || sessionStorage.getItem("visited")) {
     if(op) op.remove();
+  } else {
+    sessionStorage.setItem("visited", "true");
   }
 });
  
