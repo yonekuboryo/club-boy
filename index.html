@@ -351,25 +351,18 @@ body{
 }
 
  .slider-wrap{
- overflow-x:auto;   /* ←これに変更 */
- overflow-y:hidden;
+ overflow:hidden;
+ position:relative;
 }
- .slider{
+
+.slider{
  display:flex;
  gap:12px;
 }
 
- overflow-x:auto; /* OK */
- scrollbar-width:none; /* 追加（Firefox） */
-}
-
-.slider::-webkit-scrollbar{
- display:none; /* 追加（Chrome） */
-}
-
 .slider img{
- width:280px;
- height:180px;
+ width:260px;
+ height:160px;
  object-fit:cover;
  border-radius:12px;
  flex-shrink:0;
@@ -685,13 +678,27 @@ let isDown = false;
 let startX = 0;
 let scrollLeft = 0;
 
-// 初期化
-slider.innerHTML += slider.innerHTML;
+// 初期化（絶対これでやる）
+window.addEventListener("load", () => {
 
+  // 2倍にして無限化
+  slider.innerHTML += slider.innerHTML;
+
+  // iPhone対策
+  slider.style.scrollBehavior = "auto";
+
+  // 初期位置
+  slider.scrollLeft = 0;
+
+  requestAnimationFrame(autoSlide);
+});
+
+// 自動スライド
 function autoSlide(){
   if(!isDown){
     slider.scrollLeft += slideSpeed;
 
+    // 半分でループ
     if(slider.scrollLeft >= slider.scrollWidth / 2){
       slider.scrollLeft = 0;
     }
@@ -699,19 +706,17 @@ function autoSlide(){
   requestAnimationFrame(autoSlide);
 }
 
-autoSlide();
-
-// ===== PC =====
-slider.addEventListener('mousedown', (e) => {
+// ===== PCドラッグ =====
+slider.addEventListener("mousedown", (e) => {
   isDown = true;
   startX = e.pageX;
   scrollLeft = slider.scrollLeft;
 });
 
-slider.addEventListener('mouseup', () => isDown = false);
-slider.addEventListener('mouseleave', () => isDown = false);
+slider.addEventListener("mouseup", () => isDown = false);
+slider.addEventListener("mouseleave", () => isDown = false);
 
-slider.addEventListener('mousemove', (e) => {
+slider.addEventListener("mousemove", (e) => {
   if(!isDown) return;
   e.preventDefault();
 
@@ -720,43 +725,22 @@ slider.addEventListener('mousemove', (e) => {
 });
 
 // ===== スマホ =====
-slider.addEventListener('touchstart', (e) => {
+slider.addEventListener("touchstart", (e) => {
   isDown = true;
   startX = e.touches[0].pageX;
   scrollLeft = slider.scrollLeft;
 });
 
-slider.addEventListener('touchmove', (e) => {
+slider.addEventListener("touchmove", (e) => {
   if(!isDown) return;
 
   const walk = (e.touches[0].pageX - startX) * 2;
   slider.scrollLeft = scrollLeft - walk;
 });
 
-slider.addEventListener('touchend', () => {
+slider.addEventListener("touchend", () => {
   isDown = false;
 });
-
-// =========================
-// スクロール位置保存
-// =========================
-window.addEventListener("scroll", () => {
- sessionStorage.setItem("scrollY", window.scrollY);
-});
-
-window.addEventListener("load", () => {
- const y = sessionStorage.getItem("scrollY");
- if(y){
-  setTimeout(()=>{
-    window.scrollTo(0, parseInt(y));
-  }, 50);
- }
-});
-
-function saveScroll(){
- sessionStorage.setItem("scrollY", window.scrollY);
-}
-
 
 // =========================
 // サービス開閉
@@ -772,7 +756,6 @@ function toggleService(el){
 
  el.classList.toggle("open");
 }
-
 
 // =========================
 // スタッフ無限スクロール
