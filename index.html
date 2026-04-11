@@ -41,11 +41,20 @@ body{
 }
 
 .op-logo{
- animation: fadeUp 1.8s ease forwards;
+ width:260px;
+ opacity:0;
+ animation: fadeUp 1.5s ease forwards;
 }
 
 .op-img{
- animation: fadeUp 1.8s ease 0.8s forwards, zoom 6s ease forwards;
+ width:240px; /* ←ここ重要 */
+ border-radius:12px;
+ margin-top:20px;
+ object-fit:cover;
+
+ opacity:0;
+
+ animation: fadeUp 1.5s ease 0.8s forwards;
 }
 
 .op-catch{
