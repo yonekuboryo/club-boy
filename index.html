@@ -571,10 +571,21 @@ body{
 
 <script>
 
-setTimeout(()=>{
- const op = document.getElementById("opening");
- if(op) op.remove();
-}, 7000);
+// 初回だけオープニング表示
+const op = document.getElementById("opening");
+
+if(sessionStorage.getItem("visited")){
+  // 2回目以降は即削除
+  if(op) op.remove();
+}else{
+  // 初回フラグ
+  sessionStorage.setItem("visited", "true");
+
+  // 通常通りフェードアウト
+  setTimeout(()=>{
+    if(op) op.remove();
+  }, 7000);
+}
   
 // ===== クリック数カウント =====
 let lineClick = 0;
