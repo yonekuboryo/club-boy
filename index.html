@@ -683,7 +683,7 @@ window.addEventListener('pageshow', function (event) {
 const slider = document.getElementById("slider");
 
 // 状態
-let slideSpeed = 0.8;
+let slideSpeed = 0.5;
 let isDown = false;
 let startX = 0;
 let scrollLeft = 0;
@@ -696,10 +696,9 @@ function initSlider(){
   // 2倍にする
   slider.innerHTML += slider.innerHTML;
 
-  // 初期位置
-  slider.scrollLeft = slider.scrollWidth / 2;
+  // 最初は左からスタート
+  slider.scrollLeft = 0;
 
-  // アニメーション開始
   requestAnimationFrame(autoSlide);
 }
 
@@ -708,9 +707,9 @@ function autoSlide(){
   if(!isDown){
     slider.scrollLeft += slideSpeed;
 
-    // 無限ループ
-    if(slider.scrollLeft >= slider.scrollWidth){
-      slider.scrollLeft = slider.scrollWidth / 2;
+    // 半分超えたら戻す（これが正解）
+    if(slider.scrollLeft >= slider.scrollWidth / 2){
+      slider.scrollLeft = 0;
     }
   }
   requestAnimationFrame(autoSlide);
