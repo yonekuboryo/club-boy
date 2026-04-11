@@ -116,6 +116,7 @@ body{
  to{
   opacity:0;
   visibility:hidden;
+  pointer-events:none; /* ←ここに追加 */
  }
 }
  
@@ -658,8 +659,11 @@ else{
  sessionStorage.setItem("visited", "true");
 
  setTimeout(()=>{
-  if(op) op.remove();
- }, 9000);
+ if(op){
+   op.style.display = "none"; // ←これ追加（重要）
+   op.remove();               // ←これも残す
+ }
+}, 9000);
 }
  
 // 戻る時も消す
