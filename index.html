@@ -358,6 +358,8 @@ body{
  display:flex;
  gap:12px;
  width:max-content;
+ overflow-x:auto;
+ scroll-behavior:smooth;
 }
 
 .slider img{
@@ -650,21 +652,22 @@ if(sessionStorage.getItem("visited")){
   }, 9000);
 }
 
-const slider = document.getElementById("slider");
+const slider = document.querySelector(".slider-wrap");
 
 let speed = 0.5;
 let isDown = false;
 let startX;
 let scrollLeft;
 
-// 無限用に複製
-slider.innerHTML += slider.innerHTML;
+// 中身複製
+const inner = slider.querySelector(".slider");
+inner.innerHTML += inner.innerHTML;
 
 function autoSlide(){
  if(!isDown){
   slider.scrollLeft += speed;
 
-  if(slider.scrollLeft >= slider.scrollWidth / 2){
+  if(slider.scrollLeft >= inner.scrollWidth / 2){
    slider.scrollLeft = 0;
   }
  }
