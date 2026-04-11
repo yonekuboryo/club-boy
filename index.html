@@ -727,6 +727,14 @@ window.addEventListener("load", () => {
   }, 50);
  }
 });
+
+// 戻る時はオープニング出さない
+window.addEventListener('pageshow', function (event) {
+  if (event.persisted) {
+    const op = document.getElementById("opening");
+    if(op) op.remove();
+  }
+});
  
 // ===== クリック数カウント =====
 let lineClick = 0;
@@ -782,7 +790,7 @@ function autoScroll(){
 
   requestAnimationFrame(autoScroll);
 }
-
+ 
 window.addEventListener('load', () => {
   initScroll();
   autoScroll();
