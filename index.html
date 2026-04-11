@@ -676,62 +676,73 @@ window.addEventListener('pageshow', function (event) {
 // =========================
 // 作業風景スライダー
 // =========================
-const slider = document.getElementById("slider");
+// =========================
+// 作業風景スライダー（完全版）
+// =========================
+window.addEventListener("load", () => {
 
-let slideSpeed = 0.5;
-let slideIsDown = false;
-let slideStartX;
-let slideScrollLeft;
+ const slider = document.getElementById("slider");
 
-// 複製
-slider.innerHTML += slider.innerHTML;
+ let slideSpeed = 0.5;
+ let slideIsDown = false;
+ let slideStartX = 0;
+ let slideScrollLeft = 0;
 
-function autoSlide(){
- if(!slideIsDown){
-  slider.scrollLeft += slideSpeed;
+ // 画像読み込み後に複製
+ slider.innerHTML += slider.innerHTML;
 
-  if(slider.scrollLeft >= slider.scrollWidth / 2){
-   slider.scrollLeft = 0;
+ function autoSlide(){
+  if(!slideIsDown){
+   slider.scrollLeft += slideSpeed;
+
+   if(slider.scrollLeft >= slider.scrollWidth / 2){
+    slider.scrollLeft = 0;
+   }
   }
+  requestAnimationFrame(autoSlide);
  }
- requestAnimationFrame(autoSlide);
-}
-autoSlide();
 
-// PC
-slider.addEventListener('mousedown', (e) => {
- slideIsDown = true;
- slideStartX = e.pageX;
- slideScrollLeft = slider.scrollLeft;
+ autoSlide();
+
+ // ===== PC =====
+ slider.addEventListener('mousedown', (e) => {
+  slideIsDown = true;
+  slideStartX = e.pageX;
+  slideScrollLeft = slider.scrollLeft;
+ });
+
+ slider.addEventListener('mouseup', () => slideIsDown = false);
+ slider.addEventListener('mouseleave', () => slideIsDown = false);
+
+ slider.addEventListener('mousemove', (e) => {
+  if(!slideIsDown) return;
+  e.preventDefault();
+
+  const x = e.pageX;
+  const walk = (x - slideStartX) * 2;
+  slider.scrollLeft = slideScrollLeft - walk;
+ });
+
+ // ===== スマホ =====
+ slider.addEventListener('touchstart', (e) => {
+  slideIsDown = true;
+  slideStartX = e.touches[0].pageX;
+  slideScrollLeft = slider.scrollLeft;
+ });
+
+ slider.addEventListener('touchmove', (e) => {
+  if(!slideIsDown) return;
+
+  const x = e.touches[0].pageX;
+  const walk = (x - slideStartX) * 2;
+  slider.scrollLeft = slideScrollLeft - walk;
+ });
+
+ slider.addEventListener('touchend', () => {
+  slideIsDown = false;
+ });
+
 });
-
-slider.addEventListener('mouseup', () => slideIsDown = false);
-slider.addEventListener('mouseleave', () => slideIsDown = false);
-
-slider.addEventListener('mousemove', (e) => {
- if(!slideIsDown) return;
- e.preventDefault();
- const x = e.pageX;
- const walk = (x - slideStartX) * 2;
- slider.scrollLeft = slideScrollLeft - walk;
-});
-
-// スマホ
-slider.addEventListener('touchstart', (e) => {
- slideIsDown = true;
- slideStartX = e.touches[0].pageX;
- slideScrollLeft = slider.scrollLeft;
-});
-
-slider.addEventListener('touchmove', (e) => {
- if(!slideIsDown) return;
- const x = e.touches[0].pageX;
- const walk = (x - slideStartX) * 2;
- slider.scrollLeft = slideScrollLeft - walk;
-});
-
-slider.addEventListener('touchend', () => slideIsDown = false);
-
 
 // =========================
 // スクロール位置保存
