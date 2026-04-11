@@ -44,28 +44,29 @@ body{
  z-index:9999;
 
  /* 5秒後にフェードアウト */
- animation: fadeOut 2s ease 3s forwards;
+ .opening{
+ animation: fadeOut 2.5s ease 6s forwards;
 }
 
-/* ロゴ */
+/* ロゴ（ゆっくり） */
 .op-logo{
  width:220px;
  opacity:0;
- transform:translateY(20px);
- animation: fadeUp 1s ease forwards;
+ transform:translateY(30px);
+ animation: fadeUp 1.8s ease forwards;
 }
 
-/* 人物 */
+/* 人物（遅れてゆっくり） */
 .op-img{
- width:220px;
- border-radius:10px;
- margin-top:20px;
- opacity:0;
- transform:translateY(20px);
- animation: fadeUp 1s ease 0.5s forwards;
+ animation: fadeUp 1.8s ease 0.8s forwards, zoom 6s ease forwards;
 }
 
-/* キャッチコピー */
+@keyframes zoom{
+ from{ transform:scale(0.95); }
+ to{ transform:scale(1); }
+}
+  
+/* キャッチ（さらに遅く＆じっくり） */
 .op-catch{
  color:#FFD700;
  font-size:18px;
@@ -73,10 +74,9 @@ body{
  margin-top:20px;
 
  opacity:0;
- transform:translateY(20px);
+ transform:translateY(30px);
 
- /* 一番最後に出す */
- animation: fadeUp 1s ease 1.2s forwards, glow 2s infinite alternate;
+ animation: fadeUp 2s ease 2.2s forwards, glow 2.5s infinite alternate;
 }
 
 .op-catch span{
@@ -544,22 +544,17 @@ body{
 
 // ===== フェード後に背景化 =====
 setTimeout(()=>{
-
- // オープニング削除
  document.getElementById("opening").style.display = "none";
 
- // 背景として人物をうっすら表示
  document.body.style.backgroundImage = "url('yonekubo.jpg')";
  document.body.style.backgroundSize = "cover";
  document.body.style.backgroundPosition = "center";
  document.body.style.backgroundAttachment = "fixed";
-
- // 暗くして見やすく
  document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
  document.body.style.backgroundBlendMode = "darken";
 
-}, 5000);
-
+}, 8500); // ←ここ伸ばす
+  
 // ===== クリック数カウント =====
 let lineClick = 0;
 let callClick = 0;
