@@ -35,6 +35,8 @@ body{
  align-items:center;
  flex-direction:column;
  z-index:9999;
+ transition: opacity 1s ease; /* ←これ追加 */
+
 }
 
 /* ===== キャッチ（最初に出る） ===== */
@@ -651,13 +653,14 @@ else{
 
  setTimeout(()=>{
   if(op){
-    op.style.opacity = "0";
-    op.style.transition = "1s";
+    op.style.opacity = "0";   // フェードアウト
+    op.style.pointerEvents = "none"; // 操作不能に
+
     setTimeout(()=>{
-      op.remove();
+      op.remove(); // 完全削除
     },1000);
   }
-}, 8000);
+},8000);
  
 // 戻る時も消す
 window.addEventListener('pageshow', function (event) {
