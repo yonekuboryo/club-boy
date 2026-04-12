@@ -35,8 +35,6 @@ body{
  align-items:center;
  flex-direction:column;
  z-index:9999;
-
- animation: fadeOut 2s ease 8s forwards;
 }
 
 /* ===== キャッチ（最初に出る） ===== */
@@ -651,12 +649,14 @@ else{
  sessionStorage.setItem("visited", "true");
 
  setTimeout(()=>{
- if(op){
-   op.style.display = "none"; // ←これ追加（重要）
-   op.remove();               // ←これも残す
- }
-}, 9000);
-}
+  if(op){
+    op.style.opacity = "0";
+    op.style.transition = "1s";
+    setTimeout(()=>{
+      op.remove();
+    },1000);
+  }
+}, 8000);
  
 // 戻る時も消す
 window.addEventListener('pageshow', function (event) {
