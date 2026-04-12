@@ -659,11 +659,12 @@ else{
     setTimeout(()=>{
       op.remove(); // 完全削除
     },1000);
-  }
-},8000);
- 
+   }
+  },8000);
+ }
 // 戻る時も消す
-window.addEventListener('pageshow', function (event) {
+window.addEventListener
+ ('pageshow', function (event) {
   const op = document.getElementById("opening");
 
   if (event.persisted || sessionStorage.getItem("visited")) {
