@@ -36,7 +36,7 @@ body{
  flex-direction:column;
  z-index:9999;
  opacity:1;
- transition: opacity 1s ease; /* ←これ追加 */
+ transition: opacity 1.5s ease-in-out; /* ←これ追加 */
 }
 
 /* ===== キャッチ（最初に出る） ===== */
@@ -658,7 +658,7 @@ else{
 
     setTimeout(()=>{
       op.remove(); // 完全削除
-    },1000);
+    },1500);
    }
   },8000);
  }
