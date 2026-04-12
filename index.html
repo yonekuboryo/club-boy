@@ -644,40 +644,51 @@ if(sessionStorage.getItem("visited")){
 }else{
   sessionStorage.setItem("visited","true");
 
+  // 初期状態（JSで作る）
+  catchText.style.opacity = "0";
+  main.style.opacity = "0";
+  main.style.transform = "translateY(30px)";
+
   // ===== ① キャッチ表示 =====
   setTimeout(()=>{
     catchText.style.transition = "1s";
     catchText.style.opacity = "1";
-  }, 500);
+  },500);
 
   // ===== ② キャッチ消す =====
   setTimeout(()=>{
     catchText.style.opacity = "0";
-  }, 3000);
+  },3000);
 
   // ===== ③ ロゴ人物表示 =====
   setTimeout(()=>{
     main.style.transition = "1s";
     main.style.opacity = "1";
     main.style.transform = "translateY(0)";
-  }, 4500);
+  },4500);
 
-  // ===== ④ 全体フェードアウト =====
+  // ===== ④ ロゴ人物フェードアウト（←ここ重要） =====
   setTimeout(()=>{
+    main.style.transition = "1.5s";
+    main.style.opacity = "0";
+    main.style.transform = "translateY(-30px)";
+  },7500);
+
+  // ===== ⑤ 全体フェードアウト =====
+  setTimeout(()=>{
+    op.style.transition = "1.5s";
     op.style.opacity = "0";
-    op.style.pointerEvents = "none";
 
     setTimeout(()=>{
       op.remove();
     },1500);
-  }, 9000);
-}
- 
-// 戻る時も消す
-window.addEventListener
- ('pageshow', function (event) {
-  const op = document.getElementById("opening");
 
+  },9000);
+}
+
+// 戻る時も消す
+window.addEventListener('pageshow', function (event) {
+  const op = document.getElementById("opening");
   if (event.persisted || sessionStorage.getItem("visited")) {
     if(op) op.remove();
   }
