@@ -644,45 +644,45 @@ if(sessionStorage.getItem("visited")){
 }else{
   sessionStorage.setItem("visited","true");
 
-  // 初期状態（JSで作る）
+  // ★最初に一度だけ設定（超重要）
+  catchText.style.transition = "opacity 1s ease";
+  main.style.transition = "opacity 1s ease, transform 1s ease";
+  op.style.transition = "opacity 1.5s ease";
+
+  // 初期状態
   catchText.style.opacity = "0";
   main.style.opacity = "0";
   main.style.transform = "translateY(30px)";
 
-  // ===== ① キャッチ表示 =====
+  // ① キャッチ表示
   setTimeout(()=>{
-    catchText.style.transition = "1s";
     catchText.style.opacity = "1";
   },500);
 
-  // ===== ② キャッチ消す =====
+  // ② キャッチ消す
   setTimeout(()=>{
     catchText.style.opacity = "0";
   },3000);
 
-  // ===== ③ ロゴ人物表示 =====
+  // ③ ロゴ人物表示
   setTimeout(()=>{
-    main.style.transition = "1s";
     main.style.opacity = "1";
     main.style.transform = "translateY(0)";
   },4500);
 
-  // ===== ④ ロゴ人物フェードアウト（←ここ重要） =====
+  // ④ ロゴ人物フェードアウト（←ここが滑らかになる）
   setTimeout(()=>{
-    main.style.transition = "1.5s";
     main.style.opacity = "0";
     main.style.transform = "translateY(-50px)";
   },7500);
 
-  // ===== ⑤ 全体フェードアウト =====
+  // ⑤ 全体フェードアウト
   setTimeout(()=>{
-    op.style.transition = "1.5s";
-    op.style.opacity = "0";
+    op.style.pointerEvents = "none";
 
     setTimeout(()=>{
       op.remove();
     },1500);
-
   },9000);
 }
 
