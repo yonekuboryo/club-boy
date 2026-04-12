@@ -718,9 +718,11 @@ function autoSlide(){
     slider.scrollLeft += slideSpeed;
 
     // 半分でループ
-    if(slider.scrollLeft >= slider.scrollWidth / 2){
-      slider.scrollLeft = 0;
-    }
+    let oneWidth = slider.scrollWidth / 2;
+
+if(slider.scrollLeft >= oneWidth){
+  slider.scrollLeft -= oneWidth;
+}
   }
   requestAnimationFrame(autoSlide);
 }
