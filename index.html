@@ -670,7 +670,7 @@ window.addEventListener('pageshow', function (event) {
 
 
 // =========================
-// 作業風景スライダー（ヌルヌル確定版）
+// 作業風景スライダー（完全版）
 // =========================
 const slider = document.getElementById("slider");
 
@@ -679,20 +679,39 @@ let isDown = false;
 let startX = 0;
 let scrollLeft = 0;
 
-// 初期化（絶対これでやる）
+// 初期化
 window.addEventListener("load", () => {
 
-  setTimeout(()=>{   // ←これ追加（超重要）
-    
+  setTimeout(()=>{
+
+    // 2倍にして無限化
     slider.innerHTML += slider.innerHTML;
+
+    // iPhone対策
     slider.style.scrollBehavior = "auto";
+
+    // 初期位置
     slider.scrollLeft = 0;
 
+    // ←これが命
     requestAnimationFrame(autoSlide);
 
-  }, 300); // 0.3秒待つ
+  }, 300);
 });
- 
+
+// ★これが抜けてた
+function autoSlide(){
+  if(!isDown){
+    slider.scrollLeft += slideSpeed;
+
+    // 半分でループ
+    if(slider.scrollLeft >= slider.scrollWidth / 2){
+      slider.scrollLeft = 0;
+    }
+  }
+  requestAnimationFrame(autoSlide);
+}
+
 // ===== PCドラッグ =====
 slider.addEventListener("mousedown", (e) => {
   isDown = true;
