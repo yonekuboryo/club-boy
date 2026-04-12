@@ -36,6 +36,7 @@ body{
  flex-direction:column;
  z-index:9999;
  opacity:1;
+ pointer-events:none;
  transition: opacity 1.5s ease-in-out; /* ←これ追加 */
 }
 
@@ -651,6 +652,7 @@ else{
 
  setTimeout(()=>{
   if(op){
+    op.offsetHeight;
     op.style.opacity = "0";   // フェードアウト
     op.style.pointerEvents = "none"; // 操作不能に
 
