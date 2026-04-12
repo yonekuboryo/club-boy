@@ -50,9 +50,6 @@ body{
  line-height:1.4;
 
  opacity:0;
- animation:
-  catchIn 1s ease forwards,
-  catchOut 1s ease 2.5s forwards;
 }
 
 .op-catch-big .highlight{
@@ -66,8 +63,7 @@ body{
  display:flex;
  flex-direction:column;
  align-items:center;
- opacity:1;
- animation: mainIn 1s ease 3.5s forwards;
+ opacity:0;
 }
 
 .op-logo{
@@ -635,34 +631,46 @@ body{
 
 <script>
 
-// =========================
-// オープニング制御（改良版）
-// =========================
 const op = document.getElementById("opening");
+const catchText = document.querySelector(".op-catch-big");
+const main = document.querySelector(".op-main");
 
-// 戻ってきた場合は絶対表示しない
-if(sessionStorage.getItem("back")){
- if(op) op.remove();
- sessionStorage.removeItem("back"); // 1回だけ有効
-}
-else if(sessionStorage.getItem("visited")){
- if(op) op.remove();
-}
-else{
- sessionStorage.setItem("visited", "true");
+if(sessionStorage.getItem("visited")){
+  if(op) op.remove();
+}else{
+  sessionStorage.setItem("visited","true");
 
- setTimeout(()=>{
-  if(op){
-    op.offsetHeight;
-    op.style.opacity = "0";   // フェードアウト
-    op.style.pointerEvents = "none"; // 操作不能に
+  // ===== ① キャッチ表示 =====
+  setTimeout(()=>{
+    catchText.style.transition = "1s";
+    catchText.style.opacity = "1";
+  }, 500);
+
+  // ===== ② キャッチ消す =====
+  setTimeout(()=>{
+    catchText.style.opacity = "0";
+  }, 3000);
+
+  // ===== ③ ロゴ人物表示 =====
+  setTimeout(()=>{
+    main.style.transition = "1s";
+    main.style.opacity = "1";
+    main.style.transform = "translateY(0)";
+  }, 4500);
+
+  // 初期位置（ちょい下から）
+  main.style.transform = "translateY(30px)";
+
+  // ===== ④ 全体フェードアウト =====
+  setTimeout(()=>{
+    op.style.opacity = "0";
 
     setTimeout(()=>{
-      op.remove(); // 完全削除
+      op.remove();
     },1500);
-   }
-  },9000);
- }
+  }, 9000);
+}
+ 
 // 戻る時も消す
 window.addEventListener
  ('pageshow', function (event) {
