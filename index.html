@@ -347,14 +347,14 @@ body{
 }
 
  .slider-wrap{
- overflow:hidden;
- position:relative;
+ overflow-x: auto;
+ -webkit-overflow-scrolling: touch; /* iPhoneヌルヌル */
+ scroll-snap-type: x mandatory;     /* スナップ */
 }
 
 .slider{
  display:flex;
  gap:12px;
- width:max-content; /* ←これ絶対必要 */
 }
 
 .slider img{
@@ -363,7 +363,8 @@ body{
  object-fit:cover;
  border-radius:12px;
  flex-shrink:0;
- box-shadow:0 10px 25px rgba(0,0,0,0.4);
+
+ scroll-snap-align: start; /* ここ重要 */
 }
 
 </style>
