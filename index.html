@@ -356,6 +356,7 @@ body{
 .slider{
  display:flex;
  gap:12px;
+ width:max-content; /* ←これ絶対必要 */
 }
 
 .slider img{
@@ -681,31 +682,17 @@ let scrollLeft = 0;
 // 初期化（絶対これでやる）
 window.addEventListener("load", () => {
 
-  // 2倍にして無限化
-  slider.innerHTML += slider.innerHTML;
+  setTimeout(()=>{   // ←これ追加（超重要）
+    
+    slider.innerHTML += slider.innerHTML;
+    slider.style.scrollBehavior = "auto";
+    slider.scrollLeft = 0;
 
-  // iPhone対策
-  slider.style.scrollBehavior = "auto";
+    requestAnimationFrame(autoSlide);
 
-  // 初期位置
-  slider.scrollLeft = 0;
-
-  requestAnimationFrame(autoSlide);
+  }, 300); // 0.3秒待つ
 });
-
-// 自動スライド
-function autoSlide(){
-  if(!isDown){
-    slider.scrollLeft += slideSpeed;
-
-    // 半分でループ
-    if(slider.scrollLeft >= slider.scrollWidth / 2){
-      slider.scrollLeft = 0;
-    }
-  }
-  requestAnimationFrame(autoSlide);
-}
-
+ 
 // ===== PCドラッグ =====
 slider.addEventListener("mousedown", (e) => {
   isDown = true;
