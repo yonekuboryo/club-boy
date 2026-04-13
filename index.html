@@ -701,14 +701,17 @@ setTimeout(()=>{
       }, 7500);
 
       setTimeout(()=>{
-        op.style.opacity = "0";
-        op.style.pointerEvents = "none";
+  op.style.opacity = "0";
+  op.style.pointerEvents = "none";
 
-        setTimeout(()=>{
-          op.remove();
-        },1500);
+      setTimeout(()=>{
+        if(op){
+        op.style.display = "none";
+        op.remove?.(); // 使えれば削除
+        }
+      },1500);
 
-      }, 9000);
+     }, 9000);
 
     });
   });
