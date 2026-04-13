@@ -639,62 +639,67 @@ const op = document.getElementById("opening");
 const catchText = document.querySelector(".op-catch-big");
 const main = document.querySelector(".op-main");
 
-if(sessionStorage.getItem("visited")){
-  if(op) op.remove();
-}else{
-  sessionStorage.setItem("visited","true");
+const images = document.querySelectorAll(".op-main img");
 
-  // 初期状態
-  // 初期状態
-catchText.style.opacity = "0";
-main.style.opacity = "0";
-main.style.transform = "translateY(30px)";
+let loaded = 0;
 
-// ★ここが重要（2段階）
-requestAnimationFrame(() => {
-  requestAnimationFrame(() => {
-
-    // transitionここでセット
-    catchText.style.transition = "opacity 1s ease";
-    main.style.transition = "opacity 1s ease, transform 1s ease";
-    op.style.transition = "opacity 1.5s ease";
-
-    // ===== ① キャッチ表示 =====
-    setTimeout(()=>{
-      catchText.style.opacity = "1";
-    }, 500);
-
-    // ===== ② キャッチ消す =====
-    setTimeout(()=>{
-      catchText.style.opacity = "0";
-    }, 3000);
-
-    // ===== ③ ロゴ人物表示 =====
-    setTimeout(()=>{
-      main.style.opacity = "1";
-      main.style.transform = "translateY(0)";
-    }, 4500);
-
-    // ===== ④ ロゴ人物フェードアウト =====
-    setTimeout(()=>{
-      main.style.opacity = "0";
-      main.style.transform = "translateY(-40px)";
-    }, 7500);
-
-    // ===== ⑤ 全体フェードアウト =====
-    setTimeout(()=>{
-      op.style.opacity = "0";
-      op.style.pointerEvents = "none";
-
-      setTimeout(()=>{
-        op.remove();
-      },1500);
-
-    }, 9000);
-
-  });
+// 画像全部読み込んだらスタート
+images.forEach(img => {
+  if(img.complete){
+    loaded++;
+  } else {
+    img.onload = () => {
+      loaded++;
+      if(loaded === images.length) startOpening();
+    };
+  }
 });
 
+// すでに全部読み込まれてる場合
+if(loaded === images.length){
+  startOpening();
+}
+
+function startOpening(){
+
+  // 初期状態
+  catchText.style.opacity = "0";
+  main.style.opacity = "0";
+  main.style.transform = "translateY(30px)";
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+
+      catchText.style.transition = "opacity 1s ease";
+      main.style.transition = "opacity 1s ease, transform 1s ease";
+      op.style.transition = "opacity 1.5s ease";
+
+      setTimeout(()=>{ catchText.style.opacity = "1"; }, 500);
+      setTimeout(()=>{ catchText.style.opacity = "0"; }, 3000);
+
+      setTimeout(()=>{
+        main.style.opacity = "1";
+        main.style.transform = "translateY(0)";
+      }, 4500);
+
+      setTimeout(()=>{
+        main.style.opacity = "0";
+        main.style.transform = "translateY(-40px)";
+      }, 7500);
+
+      setTimeout(()=>{
+        op.style.opacity = "0";
+        op.style.pointerEvents = "none";
+
+        setTimeout(()=>{
+          op.remove();
+        },1500);
+
+      }, 9000);
+
+    });
+  });
+}
 // 戻る対策
 window.addEventListener('pageshow', function (event) {
   const op = document.getElementById("opening");
