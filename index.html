@@ -685,6 +685,12 @@ function startOpening(){
 
 // ★これだけでいい
 startOpening();
+setTimeout(()=>{
+  const op = document.getElementById("opening");
+  if(op){
+    op.style.display = "none";
+  }
+}, 12000);
  
 // 戻る対策
 window.addEventListener('pageshow', function (event) {
