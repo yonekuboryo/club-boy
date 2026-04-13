@@ -370,6 +370,14 @@ body{
  scroll-snap-align: start; /* ここ重要 */
 }
 
+ .slider-wrap{
+ cursor: grab;
+}
+
+.slider-wrap:active{
+ cursor: grabbing;
+}
+
 </style>
 </head>
 <body>
@@ -691,6 +699,9 @@ setTimeout(()=>{
     op.style.display = "none";
   }
 }, 12000);
+setTimeout(()=>{
+  document.querySelector('.line-btn').style.transform = "scale(1.1)";
+},3000);
  
 // 戻る対策
 window.addEventListener('pageshow', function (event) {
@@ -802,7 +813,7 @@ function toggleService(el){
 // =========================
 const wrap = document.querySelector('.staff-wrap');
 
-let staffSpeed = 0.5;
+let staffSpeed = 0.8;
 let staffIsDown = false;
 let staffStartX;
 let staffScrollLeft;
