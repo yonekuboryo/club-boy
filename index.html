@@ -645,14 +645,16 @@ if(sessionStorage.getItem("visited")){
   sessionStorage.setItem("visited","true");
 
   // 初期状態
-  catchText.style.opacity = "0";
-  main.style.opacity = "0";
-  main.style.transform = "translateY(30px)";
+  // 初期状態
+catchText.style.opacity = "0";
+main.style.opacity = "0";
+main.style.transform = "translateY(30px)";
 
-  // ★ここ重要：一度描画させる
+// ★ここが重要（2段階）
+requestAnimationFrame(() => {
   requestAnimationFrame(() => {
 
-    // transitionはここで一回だけ
+    // transitionここでセット
     catchText.style.transition = "opacity 1s ease";
     main.style.transition = "opacity 1s ease, transform 1s ease";
     op.style.transition = "opacity 1.5s ease";
@@ -681,17 +683,17 @@ if(sessionStorage.getItem("visited")){
 
     // ===== ⑤ 全体フェードアウト =====
     setTimeout(()=>{
-      op.style.pointerEvents = "none"; // クリック防止
       op.style.opacity = "0";
+      op.style.pointerEvents = "none";
 
       setTimeout(()=>{
         op.remove();
       },1500);
 
-    },9000);
+    }, 9000);
 
   });
-}
+});
 
 // 戻る対策
 window.addEventListener('pageshow', function (event) {
