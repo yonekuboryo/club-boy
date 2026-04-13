@@ -643,39 +643,8 @@ const images = document.querySelectorAll(".op-main img");
 let loaded = 0;
 let started = false;
 
-function checkStart(){
-  if(loaded === images.length && !started){
-    started = true;
-    startOpening();
-  }
-}
+function startOpening(){
 
-// 画像監視
-images.forEach(img => {
-  if(img.complete){
-    loaded++;
-    checkStart();
-  } else {
-    img.onload = () => {
-      loaded++;
-      checkStart();
-    };
-    img.onerror = () => {  // ←これ重要
-      loaded++;
-      checkStart();
-    };
-  }
-});
-
-// ★保険（Yahoo対策）
-setTimeout(()=>{
-  if(!started){
-    started = true;
-    startOpening();
-  }
-}, 1500); // 1.5秒待って強制開始
- 
-  // 初期状態
   catchText.style.opacity = "0";
   main.style.opacity = "0";
   main.style.transform = "translateY(30px)";
@@ -701,18 +670,21 @@ setTimeout(()=>{
       }, 7500);
 
       setTimeout(()=>{
-  op.style.opacity = "0";
-  op.style.pointerEvents = "none";
+        op.style.opacity = "0";
+        op.style.pointerEvents = "none";
 
-      setTimeout(()=>{
-        if(op){
-        op.style.display = "none";
-        op.remove?.(); // 使えれば削除
-        }
-      },1500);
+        setTimeout(()=>{
+          op.style.display = "none"; // ←重要
+        },1500);
 
-     }, 9000);
+      }, 9000);
 
+    });
+  });
+}
+
+// ★これだけでいい
+startOpening();
     });
   });
 }
